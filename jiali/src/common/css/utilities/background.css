@@ -1,0 +1,190 @@
+@responsive {
+    /* 首页 */
+    .bg-navigation-pc-cover-image { /* PC端banner背景图 */
+        background-image: url(../../images/index/banner.png);
+        @apply .bg-no-repeat;
+    }
+    .bg-navigation-pad-cover-image {
+        background-image: url(../../images/index/banner.png);
+        @apply .bg-no-repeat;
+    }
+    .bg-navigation-mobile-cover-image { /* 手机端banner图 */
+        background-image: url(../../images/index/mbanner.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+
+
+    .bg-button-image { /* 股票股指介绍按钮图片 */
+        background-image: url(../../svg/icon_transaction_button.svg);
+    }
+
+    .bg-technical-side-image { /* 基础面*/
+        background-image: url(../../images/index/technical_side_bg.png)
+    }
+    .bg-fundamental-image { /* 技术面*/
+        background-image: url(../../images/index/fundamental_bg.png);
+    }
+
+
+    .bg-trading-central-banner{
+        background: url(../../images/trading-central/banner1.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-trading-platform-banner{
+        background-image: url(../../images/trading-platform/trading-platform-banner.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-friend-referral-banner{
+        background-image: url(../../images/award/friend_referral_banner.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-spring-season-banner{
+        background-image: url(../../images/award/spring-season-banner.jpg);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-spring-season-bg{
+        background-image: url(../../images/award/spring-season_bg.png);
+        @apply .bg-cover;
+    }
+    .bg-spring-season-bg2{
+        background-image: url(../../images/award/spring-season_bg2.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-spring-season-bg3{
+        background-image: url(../../images/award/spring-season_bg3.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-friend-referral-news{
+        background-image: url(../../images/award/friend_referral_news.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-banner{
+        background-image: url(../../images/mcfc/mcfc.png);
+        height: 780px;
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-chuangxin{
+        background-image: url(../../images/mcfc/mcfc_chuangxin_min.jpg);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-event-banner{
+        background-image: url(../../images/mcfc/mcfc_event_bann.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-intro{
+        background-image: url(../../images/mcfc/mcfc_intro/mcfc_chuangxin_min.jpg);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-direct-banner{
+        background: url(../../images/mcfc/mcfc_direct/banner600.png) no-repeat 100% 100%;
+        background-size: cover;
+        height: 627px;
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-direct-goods1{
+        background-image: url(../../images/mcfc/mcfc_direct/mcfc_direct_ticket_m.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-direct-goods2{
+        background-image: url(../../images/mcfc/mcfc_direct/qiu.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-direct-tiaojian{
+        background-image: url(../../images/mcfc/mcfc_direct/mcfc_tiaojian_bg.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    .bg-mcfc-direct-list{
+        background-image: url(../../images/mcfc/mcfc_direct/mcfc_direct_back_3.png);
+        @apply .bg-cover .bg-no-repeat;
+    }
+    /*mt5页面*/
+    .bg_mt5_pc_banner{
+        background:url("../../lp/images/mt5/banner.png") no-repeat 100% 100% ;
+        background-size: cover;
+    }
+    .bg_mt5_m_banner{
+        background: url("../../lp/images/mt5/mbannerbg.png") no-repeat 100% 100% ;
+        background-size: cover;
+    }
+    .bg_mt5_container{
+        background-image:url("../../lp/images/mt5/pc_content.jpg") ;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .mt5-form{
+        box-shadow: none;
+        width: 320px;
+        height: 495px;
+    }
+    .mt5-form-m{
+        box-shadow: 0px 5px 54px 0px #030303;
+        border-radius: 10px;
+    }
+    .dui{
+        width: 285px;
+        height: 110px;
+        line-height: 75px;
+        background: url("../../lp/images/mt5/d.jpg") no-repeat 100% 100%;
+        background-size: 100% 100%;
+    }
+    .mdui{
+        /*width: 285px;*/
+        height: 45px;
+        line-height: 25px;
+        background: url("../../lp/images/mt5/mdui.jpg") no-repeat 100% 100%;
+        background-size: 100% 100%;
+    }
+    .m5{
+        width: 425px;
+        height: 110px;
+        /*line-height: 75px;*/
+        background: url("../../lp/images/mt5/m5.jpg") no-repeat 100% 100%;
+        background-size: 100% 100%;
+    }
+    .m_5{
+        /*width: 425px;*/
+        height: 45px;
+        /*line-height: 75px;*/
+        background: url("../../lp/images/mt5/m_5.jpg") no-repeat 100% 100%;
+        background-size: 100% 100%;
+    }
+    .m4{
+         width: 425px;
+         height: 110px;
+         /*line-height: 75px;*/
+         background: url("../../lp/images/mt5/m4.jpg") no-repeat 100% 100%;
+         background-size: 100% 100%;
+     }
+    .m_4{
+        /*width: 425px;*/
+        height: 45px;
+        /*line-height: 75px;*/
+        background: url("../../lp/images/mt5/m_4.jpg") no-repeat 100% 100%;
+        background-size: 100% 100%;
+    }
+    .pc_mcfc{
+        right: 92px;
+        top: -40px;
+    }
+    .alert_width{
+        width: 400px;
+    }
+    .malert_width{
+        width: 320px;
+    }
+    .green_underline{
+        width: 50px;
+        height: 10px;
+        background-color: #17ce46;
+        display: block;
+    }
+    .mgreen_underline{
+        width: 30px;
+        height: 5px;
+        background-color: #17ce46;
+        display: block;
+    }
+}
+.bg-tm{
+    background: rgba(0,0,0,.1);
+}
