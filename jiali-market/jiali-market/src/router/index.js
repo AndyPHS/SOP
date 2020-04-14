@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/Home'
 import CaiChan from '@/components/CaiChan'
 import ZiNv from '@/components/ZiNv'
@@ -12,7 +11,7 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path: '/',name: 'HelloWorld',component: HelloWorld},
+    {path: '/',name: 'Home',component: Home},
     {path: '/Home',name: 'Home',component: Home},
     {path: '/CaiChan',name: 'CaiChan',component: CaiChan},
     {path: '/ZiNv',name: 'ZiNv',component: ZiNv},

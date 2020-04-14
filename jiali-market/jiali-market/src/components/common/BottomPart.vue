@@ -1,6 +1,6 @@
 <template>
-  <div class="headNav">
-    <div class="head_min">
+  <div class="BottomNav">
+    <div class="bottom_min">
       <div class="left">
         <img src="../../../static/image/common/logo.png" alt="">
       </div>
@@ -8,6 +8,9 @@
         <ul>
           <li v-for="(item, index) in navList" :key="index"><router-link :to="item.url">{{item.name}}</router-link></li>
         </ul>
+        <p>免费客服热线: 18310278608（ 周一至周日 9:00-18:00 ）</p>
+        <p>联系地址：北京市朝阳区建国门外大街22号赛特大厦3层</p>
+        <p>版权所有：北京家理律师事务所</p>
       </div>
     </div>
   </div>
@@ -15,13 +18,13 @@
 
 <script>
   export default {
-    name: 'HeadNav',
+    name: 'BottomPart',
     components:{
     },
     data () {
       return {
         navList:[
-          {name:'首页',url:'/Home'},
+          {name:'家理首页',url:'/Home'},
           {name:'离婚财产',url:'/CaiChan'},
           {name:'离婚子女',url:'/ZiNv'},
           {name:'遗产继承',url:'/JiCheng'},
@@ -36,50 +39,56 @@
 </script>
 
 <style scoped lang="scss">
-  .headNav{
+  .BottomNav{
     width:100%;
     background: #282230;
-    .head_min{
+    padding-bottom: 40px;
+    .bottom_min{
       max-width:1080px;
       margin:0 auto;
-      height: 6.1875rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       .left{
         width: 242px;
         display: flex;
         align-items: center;
         img{
           display: block;
-          width: auto;
+          width: 238px;
         }
       }
       .right{
-        justify-content: end;
-        display: flex;
+        // width:600px;
+        text-align: left;
+
         ul{
           display: flex;
-          justify-content: space-between;
+          justify-content: start;
           align-items: center;
+          margin:40px auto;
           li{
-            padding-left:26px;
-            padding-right:26px;
-            border-right: 4px solid #000;
-            font-size:18px ;
-            height: 21px;
-            line-height: 21px;
+            padding-left:16px;
+            padding-right:16px;
+            border-right: 2px solid #fff;
+            font-size:16px ;
+            height: 17px;
+            line-height: 17px;
+            &:first-of-type{
+              padding-left: 0;
+            }
             &:last-of-type{
               border-right: 0;
             }
             a{
               color:#fff;
             }
-            .router-link-exact-active{
-              color:#f65622;
-              text-decoration: underline;
-              text-underline: #f65622;
-            }
           }
+        }
+        p{
+          font-size: 16px;
+          margin-bottom: 18px;
+          color: #fff;
+          text-align: left;
         }
       }
     }
