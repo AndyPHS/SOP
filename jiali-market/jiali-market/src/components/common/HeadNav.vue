@@ -2,7 +2,9 @@
   <div class="headNav">
     <div class="head_min">
       <div class="left">
-        <img src="../../../static/image/common/logo.png" alt="">
+        <router-link to="/">
+          <img src="../../../static/image/common/logo.png" alt="">
+        </router-link>
       </div>
       <div class="right">
         <ul>
