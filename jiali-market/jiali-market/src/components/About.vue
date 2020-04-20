@@ -3,7 +3,9 @@
     <head-nav></head-nav>
     <div class="banner">
       <div class="banner_min">
-        <img src="../../static/image/about/banner_about.png" alt="">
+        <a href="">
+          <img src="../../static/image/about/banner_about.png" alt="">
+        </a>
       </div>
     </div>
     <ad></ad>
@@ -68,22 +70,22 @@
       return {
         swiperAll:[
           [
-            '../../../static/image/about/swiper01.png',
-            '../../../static/image/about/swiper02.png',
-            '../../../static/image/about/swiper03.png',
-            '../../../static/image/about/swiper04.png'
+            './static/image/about/swiper01.png',
+            './static/image/about/swiper02.png',
+            './static/image/about/swiper03.png',
+            './static/image/about/swiper04.png'
           ],
           [
-            '../../../static/image/about/swiper05.png',
-            '../../../static/image/about/swiper06.png',
-            '../../../static/image/about/swiper07.png',
-            '../../../static/image/about/swiper08.png'
+            './static/image/about/swiper05.png',
+            './static/image/about/swiper06.png',
+            './static/image/about/swiper07.png',
+            './static/image/about/swiper08.png'
           ],
           [
-            '../../../static/image/about/swiper09.png',
-            '../../../static/image/about/swiper10.png',
-            '../../../static/image/about/swiper11.png',
-            '../../../static/image/about/swiper12.png'
+            './static/image/about/swiper09.png',
+            './static/image/about/swiper10.png',
+            './static/image/about/swiper11.png',
+            './static/image/about/swiper12.png'
           ],
         ]
       }

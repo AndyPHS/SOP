@@ -3,7 +3,9 @@
     <head-nav></head-nav>
     <div class="banner">
       <div class="banner_min">
-        <img src="../../static/image/team/banner_team.png" alt="">
+        <a href="">
+          <img src="../../static/image/team/banner_team.png" alt="">
+        </a>
       </div>
     </div>
     <ad></ad>

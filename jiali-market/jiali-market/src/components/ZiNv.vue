@@ -3,7 +3,9 @@
     <head-nav></head-nav>
     <div class="banner">
       <div class="banner_min">
-        <img src="../../static/image/about/banner_about.png" alt="">
+        <a href="">
+          <img src="../../static/image/zinv/banner_zinv.png" alt="">
+        </a>
       </div>
     </div>
     <ad></ad>
@@ -123,7 +125,7 @@ import Lawyer from '@/components/common/Lawyer.vue'
 .zinv{
   .banner{
     width: 100%;
-    background: url(../../static/image/about/banner_about_bg.jpg)no-repeat;
+    background: url(../../static/image/zinv/banner_zinv_bg.jpg)no-repeat -500px;
     background-size:100% 100%;
     .banner_min{
       width: 1080px;

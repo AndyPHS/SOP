@@ -31,17 +31,17 @@
     data () {
       return {
         RongYuList:[
-          '../../../static/image/common/rongyu_left01.png',
-          '../../../static/image/common/rongyu_left02.png',
-          '../../../static/image/common/rongyu_left03.png',
-          '../../../static/image/common/rongyu_left04.png',
-          '../../../static/image/common/rongyu_left05.png',
-          '../../../static/image/common/rongyu_left06.png'
+          './static/image/common/rongyu_left01.png',
+          './static/image/common/rongyu_left02.png',
+          './static/image/common/rongyu_left03.png',
+          './static/image/common/rongyu_left04.png',
+          './static/image/common/rongyu_left05.png',
+          './static/image/common/rongyu_left06.png'
         ],
         swiperAll:[
-          '../../../static/image/common/rongyu_right01.png',
-          '../../../static/image/common/rongyu_right01.png',
-          '../../../static/image/common/rongyu_right01.png'
+          './static/image/common/rongyu_right01.png',
+          './static/image/common/rongyu_right01.png',
+          './static/image/common/rongyu_right01.png'
         ]
       }
     },

@@ -56,22 +56,22 @@
       return {
         swiperAll:[
           [
-            '../../../static/image/common/lawyer_yangshuai.png',
-            '../../../static/image/common/lawyer_humengdie.png',
-            '../../../static/image/common/lawyer_jiangchunmei.png',
-            '../../../static/image/common/lawyer_masainan.png'
+            './static/image/common/lawyer_yangshuai.png',
+            './static/image/common/lawyer_humengdie.png',
+            './static/image/common/lawyer_jiangchunmei.png',
+            './static/image/common/lawyer_masainan.png'
           ],
           [
-            '../../../static/image/common/lawyer_caoziyan.png',
-            '../../../static/image/common/lawyer_jinzengyu.png',
-            '../../../static/image/common/lawyer_miaolili.png',
-            '../../../static/image/common/lawyer_xuqian.png'
+            './static/image/common/lawyer_caoziyan.png',
+            './static/image/common/lawyer_jinzengyu.png',
+            './static/image/common/lawyer_miaolili.png',
+            './static/image/common/lawyer_xuqian.png'
           ],
           [
-            '../../../static/image/common/lawyer_zhangping.png',
-            '../../../static/image/common/lawyer_wuyingjie.png',
-            '../../../static/image/common/lawyer_wuyanming.png',
-            '../../../static/image/common/lawyer_mahongxia.png'
+            './static/image/common/lawyer_zhangping.png',
+            './static/image/common/lawyer_wuyingjie.png',
+            './static/image/common/lawyer_wuyanming.png',
+            './static/image/common/lawyer_mahongxia.png'
           ],
         ]
       }

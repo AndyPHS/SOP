@@ -64,27 +64,27 @@
         swiperList: [ // 轮播图内容
           {
             url:"",
-            img:"../../../static/image/common/swiper_home.png"
+            img:"./static/image/common/swiper_home.png"
           },
           {
             url:"",
-            img:"../../../static/image/common/swiper_caichan.png"
+            img:"./static/image/common/swiper_caichan.png"
           },
           {
             url:"",
-            img:"../../../static/image/common/swiper_zinv.png"
+            img:"./static/image/common/swiper_zinv.png"
           },
           {
             url:"",
-            img:"../../../static/image/common/swiper_jicheng.png"
+            img:"./static/image/common/swiper_jicheng.png"
           },
           {
             url:"",
-            img:"../../../static/image/common/swiper_team.png"
+            img:"./static/image/common/swiper_team.png"
           },
           {
             url:"",
-            img:"../../../static/image/common/swiper_about.png"
+            img:"./static/image/common/swiper_about.png"
           }
         ],
       }
