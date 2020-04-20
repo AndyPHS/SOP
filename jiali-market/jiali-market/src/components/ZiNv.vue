@@ -126,7 +126,7 @@ import Lawyer from '@/components/common/Lawyer.vue'
   .banner{
     width: 100%;
     background: url(../../static/image/zinv/banner_zinv_bg.jpg)no-repeat -500px;
-    background-size:100% 100%;
+    background-size:cover;
     .banner_min{
       width: 1080px;
       margin:0 auto;
