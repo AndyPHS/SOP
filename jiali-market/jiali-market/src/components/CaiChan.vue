@@ -3,7 +3,7 @@
     <head-nav></head-nav>
     <div class="banner">
       <div class="banner_min">
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/caichan/banner_caichan.png" alt="">
         </a>
       </div>
@@ -11,7 +11,7 @@
     <ad></ad>
     <div class="part1">
       <div class="part1_min">
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/caichan/caichan_part1.png" alt="">
         </a>
       </div>
@@ -19,7 +19,7 @@
     <div class="part2">
       <div class="part2_min">
         <img src="../../static/image/caichan/caichan_part2_01.png" alt="">
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/caichan/caichan_part2_btn.png" alt="">
         </a>
         <img src="../../static/image/caichan/caichan_part2_02.png" alt="">

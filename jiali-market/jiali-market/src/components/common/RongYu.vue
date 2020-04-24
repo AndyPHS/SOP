@@ -105,7 +105,6 @@
             margin-bottom:12px ;
             img{
               display: block;
-              width: 100%;
             }
           }
         }

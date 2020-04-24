@@ -3,7 +3,7 @@
     <head-nav></head-nav>
     <div class="banner">
       <div class="banner_min">
-		  <a href="">
+		  <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
 			  <img src="../../static/image/jicheng/banner_jicheng.png" alt="">
 		  </a>
       </div>
@@ -17,7 +17,9 @@
       <div class="part1_min">
         <ul>
           <li>
-            <img src="../../static/image/jicheng/part1.png" alt="">
+            <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
+              <img src="../../static/image/jicheng/part1.png" alt="">
+            </a>
           </li>
         </ul>
       </div>
@@ -39,7 +41,7 @@
             <img src="../../static/image/jicheng/part2_03.png" alt="">
           </li>
         </ul>
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/common/getmore_btn.png" alt="">
         </a>
       </div>
@@ -69,7 +71,7 @@
             <img src="../../static/image/jicheng/part3_06.png" alt="">
           </li>
         </ul>
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/common/getmore_btn.png" alt="">
         </a>
       </div>

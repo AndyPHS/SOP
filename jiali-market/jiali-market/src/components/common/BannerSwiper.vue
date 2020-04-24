@@ -1,14 +1,13 @@
 <template>
   <div class="banner">
-    <div class="banner_min">
-      <el-carousel indicator-position="inside" :height="heightNum" :width="widthNum">
-        <el-carousel-item v-for="(item, index) in swiperList" :key="index" class="bot_con">
-          <a :href="item.url">
-            <img :src="item.img" alt="">
-          </a>
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+
+    <el-carousel indicator-position="inside" :height="heightNum" :width="widthNum">
+      <el-carousel-item v-for="(item, index) in swiperList" :key="index" class="bot_con">
+        <a :href="item.url">
+          <img :src="item.img" alt="">
+        </a>
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
@@ -44,17 +43,32 @@
 <style scoped lang="scss">
   .banner{
     width: 100%;
-    background:rgba($color: #000000, $alpha: 0.8);
-    .banner_min{
-      max-width:1246px;
-      margin:0 auto;
-      .bot_con{
-        a{
-          display: block;
-          img{
-            display: block;
-            width: 100%;
-          }
+    .el-carousel__item{
+      &:first-of-type{
+        background-color: #000000;
+      }
+      &:nth-of-type(2){
+        background-color: red;
+      }
+      &:nth-of-type(3){
+        background-color: yellow;
+      }
+      &:nth-of-type(4){
+        background-color: green;
+      }
+      &:nth-of-type(5){
+        background-color: blue;
+      }
+      &:nth-of-type(6){
+        background: url(./static/image/about/banner_about_bg.jpg)no-repeat;
+      }
+      a{
+        display:block;
+        width: 1080px;
+        margin:0 auto;
+        img{
+          display:block;
+          margin-top:100px;
         }
       }
     }

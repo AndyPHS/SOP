@@ -3,7 +3,7 @@
     <head-nav></head-nav>
     <div class="banner">
       <div class="banner_min">
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/about/banner_about.png" alt="">
         </a>
       </div>
@@ -29,7 +29,7 @@
         </el-carousel>
       </div>
       <div class="getmore">
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/common/getmore_btn.png" alt="">
         </a>
       </div>
@@ -38,7 +38,7 @@
       <div class="part2_min">
         <ul>
           <li>
-            <a href="">
+            <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
               <img src="../../static/image/about/part2.png" alt="">
             </a>
           </li>

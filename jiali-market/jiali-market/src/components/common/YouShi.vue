@@ -2,7 +2,9 @@
   <div class="youshi">
     <div class="youshi_min">
       <img src="../../../static/image/common/youshi_banner.png" alt="">
-      <span>每一项有事都是保障胜诉的关键，免费预约面谈</span>
+      <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
+        <span>每一项有事都是保障胜诉的关键，免费预约面谈</span>
+      </a>
     </div>
   </div>
 </template>
@@ -35,19 +37,25 @@
         display: block;
         padding-bottom: 40px;
       }
-      span{
-        width:422px;
-        display: block;
-        height: 45px;
-        line-height: 45px;
+      a{
+        display: inline-block;
+        width: 100%;
         margin:0 auto;
-        cursor: pointer;
-        text-align: center;
-        border-radius: 23px;
-        color: #fff;
-        font-size: 18px;
-        background:url(../../../static/image/common/youshi_btn_bg.png)no-repeat;
+        span{
+          width:422px;
+          display: block;
+          height: 45px;
+          line-height: 45px;
+          margin:0 auto;
+          cursor: pointer;
+          text-align: center;
+          border-radius: 23px;
+          color: #fff;
+          font-size: 18px;
+          background:url(../../../static/image/common/youshi_btn_bg.png)no-repeat;
+        }
       }
+
     }
   }
 </style>

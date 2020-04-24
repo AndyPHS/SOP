@@ -3,7 +3,7 @@
     <head-nav></head-nav>
     <div class="banner">
       <div class="banner_min">
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/zinv/banner_zinv.png" alt="">
         </a>
       </div>
@@ -34,7 +34,7 @@
             <img src="../../static/image/zinv/part1_06.png" alt="">
           </li>
         </ul>
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/common/getmore_btn.png" alt="">
         </a>
       </div>
@@ -55,7 +55,7 @@
             <img src="../../static/image/zinv/part2_03.png" alt="">
           </li>
         </ul>
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/common/getmore_btn.png" alt="">
         </a>
       </div>
@@ -67,7 +67,7 @@
             <img src="../../static/image/zinv/part3_01.png" alt="">
           </li>
         </ul>
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/common/getmore_btn.png" alt="">
         </a>
       </div>
@@ -82,7 +82,7 @@
             <img src="../../static/image/zinv/part4.png" alt="">
           </li>
         </ul>
-        <a href="">
+        <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
           <img src="../../static/image/common/getmore_btn.png" alt="">
         </a>
       </div>

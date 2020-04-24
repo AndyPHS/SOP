@@ -1,7 +1,9 @@
 <template>
   <div class="ad">
     <div class="ad_min">
-      <img src="../../../static/image/common/ad01.png" alt="">
+      <a href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
+        <img src="../../../static/image/common/ad01.png" alt="">
+      </a>
     </div>
   </div>
 </template>
@@ -27,8 +29,11 @@
     .ad_min{
       width: 1080px;
       margin: 17px auto;
-      img{
-        display: block;
+      a{
+        display: inline-block;
+        img{
+          display: block;
+        }
       }
     }
   }

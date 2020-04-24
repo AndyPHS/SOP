@@ -15,7 +15,7 @@
               <li>2015—2018年度“北京市优秀律师”</li>
               <li>已为1000多位当事人解决婚姻家庭问题</li>
             </ul>
-            <a class="zixun" href="">
+            <a class="zixun" href="http://p.qiao.baidu.com/cps/chat?siteId=10708789&userId=20543964">
               <img src="../../../static/image/common/zixun_btn.png" alt="">
             </a>
           </div>
