@@ -215,17 +215,37 @@ export const updateTask = params => {
   return axios({
     method: "put",
     dataType: 'json',
-    url: apiUrl.updateTask + localStorage.getItem('tid'),
+    url: apiUrl.updateTask + localStorage.getItem('selectRenwuId'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
-// 查询任务列表
+// 通过任务类型查询任务列表
 export const selectTask = params => {
   return axios({
     method: "get",
     dataType: 'json',
     url: apiUrl.selectTask+"?why="+params.why + "&type="+params.type,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+// 通过关键字查询任务列表
+export const selectTaskWhere = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectTask+"?where=" + params.where,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+// 通过时间查询任务列表
+export const selectTaskWhereTime = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectTask+"?whereTime=" + params.whereTime,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: qs.stringify(params)
   });
@@ -238,5 +258,55 @@ export const selectTaskOnly = params => {
     url: apiUrl.selectTaskOnly + params,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: qs.stringify(params)
+  });
+};
+// 恢复任务recoveryDeleteTask
+export const recoveryDeleteTask = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.recoveryDeleteTask + localStorage.getItem('selectRenwuId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增任务自检项addInspectionTask
+export const addInspectionTask = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addInspectionTask +  localStorage.getItem('selectRenwuId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除任务自检项deleteInspectionTask
+export const deleteInspectionTask = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteInspectionTask + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询任务全部自检项
+export const selectInspectionTask = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectInspectionTask + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询任务剩余自检项
+export const selectSurplusInspectionTask = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectSurplusInspectionTask + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
   });
 };

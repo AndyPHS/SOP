@@ -348,17 +348,173 @@
               </li>
             </ul>
           </div>
+          <div class="mx-auto notask" v-show="notask">
+            <img class="mt-10" src="../assets/image/notask.png" alt="">
+          </div>
         </div>
       </div>
     </div>
+    <el-dialog title="任务设置" :visible.sync="dialogConfigRenWu" center width="720px">
+      <el-form :model="renwuform" id="configrenwu">
+        <el-form-item label="任务名称" :label-width="formLabelWidth">
+          <el-input v-model="renwuform.title" class="inputcon" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="任务介绍" :label-width="formLabelWidth">
+          <el-input v-model="renwuform.description" class="inputcon" ></el-input>
+        </el-form-item>
+        <!-- 所属项目及分组 暂无接口 -->
+        <!-- <el-form-item label="所属项目及分组" :label-width="formLabelWidth">
+          <el-select class="mr-10" v-model="BuMenSelect" @change="BuMenChange" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in BuMen"
+              :key="index"
+              :label="index"
+              :value="item">
+            </el-option>
+          </el-select>
+          <el-select v-model="XiangMuOrFenZuSelecter"  placeholder="请选择">
+            <el-option
+              v-for="(item, index) in XiangMuOrFenZuAll"
+              :key="index"
+              :label="item.title"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item> -->
+        <el-form-item label="负责人" :label-width="formLabelWidth">
+          <el-select class="mr-10" v-model="dptBuMenSelect" @change="chooseDpt" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in BuMen"
+              :key="index"
+              :label="index"
+              :value="item">
+            </el-option>
+          </el-select>
+          <el-select v-model="renwuform.dpt" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in PersonAll"
+              :key="index"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="任务成员" :label-width="formLabelWidth">
+          <el-select class="mr-10" v-model="dptDBuMenSelect" @change="choosedptD" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in BuMen"
+              :key="index"
+              :label="index"
+              :value="item">
+            </el-option>
+          </el-select>
+          <el-select v-model="renwuform.dptD" placeholder="请选择" multiple="multiple">
+            <el-option
+              v-for="(item, index) in PersonAll"
+              :key="index"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="审核人" :label-width="formLabelWidth">
+          <el-select class="mr-10" v-model="examineIdBuMenSelect"  @change="chooseexamineId" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in BuMen"
+              :key="index"
+              :label="index"
+              :value="item">
+            </el-option>
+          </el-select>
+          <el-select v-model="renwuform.examineId" @change="chooseLeader" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in PersonAll"
+              :key="index"
+              :label="item.name"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="时间" :label-width="formLabelWidth">
+          <el-date-picker
+            v-model="renwuform.start_time"
+            type="datetime"
+            value-format="yyyy-MM-dd hh:mm:ss"
+            class="mr-3 input-class"
+            placeholder="开始时间"
+            default-time="09:00:00">
+          </el-date-picker>
+          <el-date-picker
+            v-model="renwuform.stop_time"
+            value-format="yyyy-MM-dd hh:mm:ss"
+            type="datetime"
+            placeholder="结束时间"
+            default-time="18:00:00">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="是否自动延期" :label-width="formLabelWidth">
+          <el-radio-group v-model="renwuform.autoDelay">
+            <el-radio label="1">是</el-radio>
+            <el-radio label="0">否</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <!-- 优先级 暂尚未做接口 -->
+        <!-- <el-form-item label="优先级" :label-width="formLabelWidth">
+          <el-select v-model="renwuform.orderId" placeholder="请选择">
+            <option value="1">紧急</option>
+            <option value="2">普通</option>
+          </el-select>
+        </el-form-item> -->
+       <!-- <el-form-item label="提醒方式" :label-width="formLabelWidth">
+          <el-select v-model="renwuform.orderId" placeholder="请选择">
+            <option value="1">紧急</option>
+            <option value="2">普通</option>
+          </el-select>
+        </el-form-item> -->
+        <!-- 提醒时间 尚未接口 -->
+        <!-- <el-form-item label="提醒时间" :label-width="formLabelWidth">
+          <el-select v-model="renwuform.orderId" placeholder="请选择">
+            <option value="1">任务到期时</option>
+            <option value="2">5分钟前</option>
+            <option value="3">10分钟前</option>
+            <option value="4">30分钟前</option>
+            <option value="5">1小时前</option>
+          </el-select>
+        </el-form-item> -->
+        <!-- 提醒对象 确实接口 -->
+        <!-- <el-form-item label="提醒对象" :label-width="formLabelWidth">
+          <el-select class="mr-10" v-model="BuMenSelect"  placeholder="请选择">
+            <el-option
+              v-for="(item, index) in BuMen"
+              :key="index"
+              :label="index"
+              :value="item">
+            </el-option>
+          </el-select>
+          <el-select v-model="renwuform.examineId"  placeholder="请选择">
+            <el-option
+              v-for="(item, index) in PersonAll"
+              :key="index"
+              :label="item.title"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item> -->
+      </el-form>
+      <div slot="footer" class="dialog-footer pb-2" >
+        <div class="registBtn mx-auto" @click="addTaskBtn">保存</div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+  import {addTask} from '@/api/api/requestLogin.js' // 新增任务
   import {deleteTask} from '@/api/api/requestLogin.js' // 删除任务
   import {selectTask} from '@/api/api/requestLogin.js' // 查询任务列表
   import {selectTaskOnly} from '@/api/api/requestLogin.js' // 查询任务详情信息
-
+  import {createdDet} from '@/api/api/requestLogin.js' // 查找部门
+  import {selectDet} from '@/api/api/requestLogin.js' // 查找部门成员
   export default{
     name:'TaskManagement',
     data() {
@@ -375,7 +531,9 @@
         select:false,
         selectRenWu:false,
         myjobtitle: '我负责的', // 修改我负责和我发布任务的标题
+        myjobId: 1, // 我发布的ID
         changeSelectRenWuTitle: '全部任务', // 修改选择任务的标题
+        changeSelectRenWuID: 1, // 修改选择任务的ID
         selectTime: '',
         searchMsg: '',
         newRenWu: '',
@@ -384,22 +542,67 @@
         futureDay: [], // 未来任务
         endDay: [], // 完结任务
         basic_data: {}, // 任务详情信息
+        notask: false, // 没有任务的时候替代图片
         form: {
           type: ''
-        }
+        },
+        formLabelWidth: '150px',
+        dialogConfigRenWu: true, // 任务设置弹框开关
+        XiangMuOrFenZuSelecter: '', // 选择具体项目
+        XiangMuOrFenZuAll: [], // 项目总分组
+        BuMenSelect: '', // 选定部门
+        dptBuMenSelect: '', // 选定负责人部门
+        dptDBuMenSelect: '', // 选定任务成员部门
+        examineIdBuMenSelect: '', // 选定审核人部门
+        BuMen: {}, // 部门列表
+        PersonAll: {}, // 部门全部成员
+        renwuform: { // 任务设置表单
+          title: '', // 标题
+          description: '', // 介绍
+          type: null,  // 类型（1为单独项目 2为项目任务）
+          dptId: null,  // 项目Id 任务类型为2的时候添加
+          groupId: null, // 任务组id 任务类型为2的时候添加
+          autoDelay: null, // 是否自动延期
+          start_time: '', // 开始时间 格式为yyyy-MM-dd HH:mm:ss
+          stop_time: '', // 结束时间 格式为yyyy-MM-dd HH:mm:ss
+          orderId: null,  // 排序Id
+          examineId: null, // 审核人
+          dpt: null, // 负责人
+          dptD: [],   // 成员[1,2,3]
+        },
       }
     },
     mounted(){
       this.pagestart()//页面初始化
+      this.GetBuMen() // 查找部门
     },
     methods:{
+      addTaskBtn(){  // 新增任务
+        addTask({
+          title: this.renwuform.title,
+          description: this.renwuform.description,
+          type: 1,
+          autoDelay: this.renwuform.autoDelay,
+          start_time: this.renwuform.start_time,
+          stop_time: this.renwuform.stop_time,
+          dpt: this.renwuform.dpt,
+          dptD: JSON.stringify(this.renwuform.dptD),
+          examineId: this.renwuform.examineId,
+        }).then((data)=>{
+          this.renwuform = {};
+        })
+      },
       pagestart(){
         this.shortName = this.name.slice(1)  // 截取用户姓名后两位
-        selectTask().then((data)=>{  // 查询任务列表
+        selectTask({
+          why: 1,
+          type: 1
+        }).then((data)=>{  // 查询任务列表
           this.toDay = data.data.data.toDay;
           this.nearDay = data.data.data.nearDay;
           this.futureDay = data.data.data.futureDay;
           this.endDay = data.data.data.endDay;
+
         })
       },
       enter(e){  // 鼠标移入任务查看按钮触发
@@ -423,60 +626,91 @@
       chooseAboutme(item){
         this.select = false
         this.myjobtitle = item.name;
+        this.myjobId = item.ID;
+        selectTask({
+          why: this.myjobId,
+          type: this.changeSelectRenWuID
+        }).then((data)=>{  // 查询任务列表
+          this.toDay = data.data.data.toDay;
+          this.nearDay = data.data.data.nearDay;
+          this.futureDay = data.data.data.futureDay;
+          this.endDay = data.data.data.endDay;
+
+        })
       },
       chooseRenWu(item){  // 选择任务按钮触发
-        if(item.ID==1){
-          this.pagestart()
-          this.changeSelectRenWuTitle = '全部任务'
-        }else if(item.ID==2){
-          selectTask().then((data)=>{  // 查询任务列表
-            this.toDay = data.data.data.toDay;
-            this.nearDay = [];
-            this.futureDay = [];
-            this.endDay = [];
-          })
-          this.changeSelectRenWuTitle = '今日任务'
-        }else if(item.ID==3){
-          selectTask().then((data)=>{  // 查询任务列表
-            this.toDay = [];
-            this.nearDay = data.data.data.nearDay;
-            this.futureDay = [];
-            this.endDay = [];
-          })
-          this.changeSelectRenWuTitle = '近期任务'
-        }else if(item.ID==4){
-          selectTask().then((data)=>{  // 查询任务列表
-            this.toDay = [];
-            this.nearDay = [];
-            this.futureDay = data.data.data.futureDay;
-            this.endDay = [];
-          })
-          this.changeSelectRenWuTitle = '未来任务'
-        }else if(item.ID==5){
-          selectTask().then((data)=>{  // 查询任务列表
-            this.toDay = [];
-            this.nearDay = [];
-            this.futureDay = [];
-            this.endDay =  data.data.data.endDay;
-          })
-          this.changeSelectRenWuTitle = '完成任务'
-        }else if(item.ID==6){
-          selectTask().then((data)=>{  // 查询任务列表
-            this.toDay = [];
-            this.nearDay = [];
-            this.futureDay = [];
-            this.endDay =  [];
-          })
-          this.changeSelectRenWuTitle = '待分配任务'
-        }else if(item.ID==7){
-          selectTask().then((data)=>{  // 查询任务列表
-            this.toDay = [];
-            this.nearDay = [];
-            this.futureDay = [];
-            this.endDay =  [];
-          })
-          this.changeSelectRenWuTitle = '已删除任务'
-        }
+        this.changeSelectRenWuID = item.ID;
+        this.toDay = [];
+        this.nearDay = [];
+        this.futureDay = [];
+        this.endDay = [];
+        selectTask({
+          why: this.myjobId,
+          type: item.ID
+        }).then((data)=>{  // 查询任务列表
+          this.toDay = data.data.data.toDay;
+          this.nearDay = data.data.data.nearDay;
+          this.futureDay = data.data.data.futureDay;
+          this.endDay = data.data.data.endDay;
+          this.changeSelectRenWuTitle = item.name;
+          if(this.toDay.length==0&&this.nearDay.length==0&&this.futureDay.length==0&&this.endDay.length==0){
+            this.notask = true;
+          }else{
+            this.notask = false;
+          }
+          // if(item.ID==1){
+          //   this.pagestart()
+          //   this.changeSelectRenWuTitle = '全部任务'
+          // }else if(item.ID==2){
+          //   selectTask().then((data)=>{  // 查询任务列表
+          //     this.toDay = data.data.data.toDay;
+          //     this.nearDay = [];
+          //     this.futureDay = [];
+          //     this.endDay = [];
+          //   })
+          //   this.changeSelectRenWuTitle = '今日任务'
+          // }else if(item.ID==3){
+          //   selectTask().then((data)=>{  // 查询任务列表
+          //     this.toDay = [];
+          //     this.nearDay = data.data.data.nearDay;
+          //     this.futureDay = [];
+          //     this.endDay = [];
+          //   })
+          //   this.changeSelectRenWuTitle = '近期任务'
+          // }else if(item.ID==4){
+          //   selectTask().then((data)=>{  // 查询任务列表
+          //     this.toDay = [];
+          //     this.nearDay = [];
+          //     this.futureDay = data.data.data.futureDay;
+          //     this.endDay = [];
+          //   })
+          //   this.changeSelectRenWuTitle = '未来任务'
+          // }else if(item.ID==5){
+          //   selectTask().then((data)=>{  // 查询任务列表
+          //     this.toDay = [];
+          //     this.nearDay = [];
+          //     this.futureDay = [];
+          //     this.endDay =  data.data.data.endDay;
+          //   })
+          //   this.changeSelectRenWuTitle = '完成任务'
+          // }else if(item.ID==6){
+          //   selectTask().then((data)=>{  // 查询任务列表
+          //     this.toDay = [];
+          //     this.nearDay = [];
+          //     this.futureDay = [];
+          //     this.endDay =  [];
+          //   })
+          //   this.changeSelectRenWuTitle = '待分配任务'
+          // }else if(item.ID==7){
+          //   selectTask().then((data)=>{  // 查询任务列表
+          //     this.toDay = [];
+          //     this.nearDay = [];
+          //     this.futureDay = [];
+          //     this.endDay =  [];
+          //   })
+          //   this.changeSelectRenWuTitle = '已删除任务'
+          // }
+        })
         this.selectRenWu = false
       },
       searchList(){
@@ -522,6 +756,38 @@
           });
         });
       },
+      GetBuMen(){ // 获取部门
+        createdDet().then((data)=>{
+          this.BuMen = data.data.data.permissions_department
+        })
+      },
+      chooseDpt(){ // 获取负责人
+        this.PersonAll = {}
+        selectDet(this.dptBuMenSelect).then((data)=>{
+          this.PersonAll = data.data.data
+        })
+      },
+      choosedptD(){ // 获取任务成员
+        this.PersonAll = {}
+        selectDet(this.dptDBuMenSelect).then((data)=>{
+          this.PersonAll = data.data.data
+        })
+      },
+      chooseexamineId(){
+        this.PersonAll = {}
+        selectDet(this.examineIdBuMenSelect).then((data)=>{
+          this.PersonAll = data.data.data
+        })
+      },
+      chooseLeader(){
+        console.log(this.renwuform.examineId)
+      },
+      BuMenChange(){
+        console.log(this.BuMenSelect)
+      },
+      XiangMuOrFenZuChange(){
+        console.log(1)
+      }
     }
   }
 </script>
@@ -953,10 +1219,23 @@
             }
           }
         }
+        .notask{
+          padding:120px;
+          img{
+            margin:0 auto;
+          }
+        }
       }
     }
   }
   .el-date-editor.el-input, .el-date-editor.el-input__inner{
-    width: 140px !important;
+    width: 150px;
   }
+  #configrenwu .el-date-editor.el-input,  #configrenwu .el-date-editor.el-input__inner{
+    width: 210px !important;
+  }
+ .registBtn{width: 225px;height: 37px;font-size:18px;color:red;border:1px solid red;border-radius: 19px;line-height: 37px;cursor: pointer;}
+ .registBtn:hover{background-color: indianred;color: #fff;}
+ .inputcon{width: 83.3% !important;}
+ .el-dialog--center .el-dialog__body{padding:25px 25px 0!important;}
 </style>

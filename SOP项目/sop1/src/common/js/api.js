@@ -91,7 +91,16 @@ const apiUrl = {
   selectTask: baseURL + 'task/select_task',
   // 查询任务详细信息/task/select_task_only/{tid}
   selectTaskOnly: baseURL + 'task/select_task_only/',
-
+  // 恢复任务task/recovery_delete_task/{tid}
+  recoveryDeleteTask: baseURL + 'task/recovery_delete_task/',
+  // 新增任务自检项/task/add_inspection_task/{tid}
+  addInspectionTask: baseURL + 'task/add_inspection_task/',
+  // 删除任务自检项task/delete_inspection_task/{tid}
+  deleteInspectionTask: baseURL + 'task/delete_inspection_task/',
+  // 查询任务全部自检项目/task/select_inspection_task/{tid}
+  selectInspectionTask: baseURL + 'task/select_inspection_task/',
+  // 查询任务剩余自检项task/select_surplus_inspection_task/{tid}
+  selectSurplusInspectionTask: baseURL + 'task/select_surplus_inspection_task/'
 }
 export{
   apiUrl

@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       '/api':{
         target:'http://hive.net/api/',
-        // target: 'http://case.net/api/',
+        // target: 'http://woke.aladdinlaw.com/api/',
         changeOrigin:true,//允许跨域
         pathRewrite:{
           '/api':''
