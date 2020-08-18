@@ -95,7 +95,23 @@
                   <span @click="goBack" class="text-lg cursor-pointer text-gray-500">返回</span>
                 </div>
                 <div class="text-center">
-                  <h2 class="text-2xl text-red-500 font-bold mb-5">确认管辖法院</h2>
+                  <h2 class="text-2xl text-red-500 font-bold mb-5 relative">
+                    确认管辖法院
+                    <ul class="iconList">
+                      <li>
+                        <img src="../assets/image/guo_icon.png" alt="">
+                      </li>
+                      <li>
+                        <img src="../assets/image/feng_icon.png" alt="">
+                      </li>
+                      <li>
+                        <img src="../assets/image/xie_icon.png" alt="">
+                      </li>
+                      <li>
+                        <img src="../assets/image/yan_icon.png" alt="">
+                      </li>
+                    </ul>
+                  </h2>
                   <h3 class="text-xl text-gray-500 font-bold">张三诉讼李四离婚纠纷案件</h3>
                 </div>
                 <div class="text-left">
@@ -703,6 +719,16 @@
           height: 12px;
         }
       }
+    }
+  }
+  .iconList{
+    position: absolute;
+    top:-10px;
+    right: -40px;
+    display: flex;
+    align-items: center;
+    li{
+      margin-right: 8px;
     }
   }
 </style>

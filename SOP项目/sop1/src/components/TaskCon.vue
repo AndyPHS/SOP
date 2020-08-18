@@ -37,8 +37,8 @@
                       任务管理<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown" class="taolun" width="100px">
-                      <div class="a" @click="taolun" style="width: 100px;font-size:14px;text-align:center;line-height:30px">讨论管理</div>
-                      <div class="a b" disabled style="width: 100px;font-size:14px;text-align:center;line-height:30px">发起讨论</div>
+                      <div class="a" @click="taolun" style="width: 100px;cursor: pointer;font-size:14px;text-align:center;line-height:30px">讨论管理</div>
+                      <!-- <div class="a b" disabled style="width: 100px;font-size:14px;text-align:center;line-height:30px">发起讨论</div> -->
                     </el-dropdown-menu>
                   </el-dropdown>
                 </div>
@@ -512,7 +512,7 @@
         this.$router.replace('/TaskFile')
       },
       taolun () {
-        alert(1)
+        this.$router.replace('/taskTalk')
       },
       handleRemove(file, fileList) { // 删除日志预览图片
         console.log(file, fileList);

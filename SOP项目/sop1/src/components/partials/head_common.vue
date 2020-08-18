@@ -10,8 +10,10 @@
         </div>
         <div class="head_t_r">
            <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../../assets/image/new_msg_icon.png" alt="">
-             <img class="ml-1" src="../../assets/image/down_icon.png" alt="">
+             <img v-if="talkFlag==true" @click="goTalkAc" src="../../assets/image/new_msg_icon.png" alt="">
+             <img v-if="talkFlag==false" @click="goTalkAc" src="../../assets/image/new_msg_active_icon.png" alt="">
+             <img v-if="talkFlag==true" class="ml-1" src="../../assets/image/down_icon.png" alt="">
+             <img v-if="talkFlag==false" class="ml-1" src="../../assets/image/down_active_icon.png" alt="">
            </div>
            <!-- <div class="flex items-center mr-4 cursor-pointer">
              <img src="../../assets/image/date_icon.png" alt="">
@@ -78,6 +80,7 @@
         name: localStorage.getItem('name'),
         shortName:'', // 名字两个字
         userId: localStorage.getItem('userId'),
+        talkFlag: true, // 默认讨论样式
       }
     },
     mounted() {
@@ -86,6 +89,10 @@
     methods:{
       getName () {
         this.shortName = this.name.slice(1)  // 截取用户姓名后两位
+      },
+      goTalkAc () {
+        this.talkFlag = !this.talkFlag
+        this.$router.replace('/taskTalkModel')
       }
     }
   }

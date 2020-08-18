@@ -8,7 +8,10 @@ const TaskManagement = () => import('@/components/TaskManagement')  // 任务管
 const TaskCon = () => import('@/components/TaskCon')    // 任务信息页面
 const TaskFile = () => import('@/components/TaskFile')  // 任务文件夹页面
 const ViewImage = () => import('@/components/ViewImage')  // 预览任务图片
-
+// 讨论模块
+const taskTalk = () => import('@/components/talk/taskTalk')  // 单独项目或者任务讨论列表
+const talkStart = () => import('@/components/talk/talkStart') // 发起讨论
+const taskTalkModel = () => import('@/components/talk/taskTalkModel') // 讨论模块页面
 import text from '@/components/text'
 
 Vue.use(Router)
@@ -30,7 +33,14 @@ export default new Router({
     {path: '/TaskFile', name: 'TaskFile', component: TaskFile,meta: {title: '任务文件',type: 'login'}},
     // 查看任务图片
     {path: '/ViewImage', name: 'ViewImage', component: ViewImage,meta: {title: '预览图片',type: 'login'}},
+    // 单独项目或者人物讨论列表
+    {path: '/taskTalk', name: 'taskTalk', component: taskTalk,meta: {title: '讨论管理',type: 'login'}},
+    // 讨论模块页面
+    {path: '/taskTalkModel', name: 'taskTalkModel', component: taskTalkModel,meta: {title: '讨论管理',type: 'login'}},
     
+    // 发起讨论
+    {path: '/talkStart', name: 'talkStart', component: talkStart,meta: {title: '发起讨论',type: 'login'}},
+
     // 测试页面
     {path: '/text', name: 'text', component: text,meta: {title: '首页',type: 'text'}}
   ]
