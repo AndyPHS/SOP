@@ -7,15 +7,15 @@
           <div class="con_min_left">
             <ul>
               <li :class="active==1?'bg-white': 'default_bg' " @click="checkTab(1)" class="flex justify-center items-center">
-                <img src="../assets/image/msgcheck_icon.png" alt="">
+                <img src="@/assets/image/msgcheck_icon.png" alt="">
                 <h2>任务信息</h2>
               </li>
               <li :class="active==2?'bg-white': 'default_bg' " @click="checkTab(2)" class="flex justify-center items-center">
-                <img src="../assets/image/logcheck_icon.png" alt="">
+                <img src="@/assets/image/logcheck_icon.png" alt="">
                 <h2>任务日志</h2>
               </li>
               <li :class="active==3?'bg-white': 'default_bg' " @click="checkTab(3)" class="flex justify-center items-center ">
-                <img src="../assets/image/filecheck_icon.png" alt="">
+                <img src="@/assets/image/filecheck_icon.png" alt="">
                 <h2>任务文件</h2>
               </li>
             </ul>
@@ -24,11 +24,11 @@
             <div v-if="xinxiFlag" class="xinxi">
               <div class="flex justify-between items-center px-10 py-10">
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/back_icon.png" alt="">
+                  <img class="mr-3" src="@/assets/image/back_icon.png" alt="">
                   <span @click="goBack" class="text-lg cursor-pointer">返回</span>
                 </div>
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/duoxuankuangqueding.png" alt="">
+                  <img class="mr-3" src="@/assets/image/duoxuankuangqueding.png" alt="">
                   <h2 class="text-2xl text-red-500 font-bold">确认管辖法院</h2>
                 </div>
                 <div>
@@ -134,15 +134,15 @@
             <div v-if="rizhiFlag" class="rizhi">
               <div class="flex justify-between items-center px-10 py-10">
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/back_icon.png" alt="">
+                  <img class="mr-3" src="@/assets/image/back_icon.png" alt="">
                   <span @click="goBack" class="text-lg cursor-pointer">返回</span>
                 </div>
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/duoxuankuangqueding.png" alt="">
+                  <img class="mr-3" src="@/assets/image/duoxuankuangqueding.png" alt="">
                   <h2 class="text-2xl text-red-500 font-bold">确认管辖法院</h2>
                 </div>
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/edit_icon.png" alt="">
+                  <img class="mr-3" src="@/assets/image/edit_icon.png" alt="">
                   <span @click="openrizhiForm" class="text-lg">填写日志</span>
                 </div>
               </div>
@@ -159,23 +159,23 @@
                     </div>
                     <div class="pl-6 py-2 flex flex-wrap">
                       <div class="imagetype">
-                        <img class="mx-3" src="../assets/image/image_icon.png" alt="">
+                        <img class="mx-3" src="@/assets/image/image_icon.png" alt="">
                         <span>张三身份证.jpg</span>
                       </div>
                       <div class="imagetype">
-                        <img class="mx-3" src="../assets/image/image_icon.png" alt="">
+                        <img class="mx-3" src="@/assets/image/image_icon.png" alt="">
                         <span>张三身份证.jpg</span>
                       </div>
                       <div class="imagetype">
-                        <img class="mx-3" src="../assets/image/image_icon.png" alt="">
+                        <img class="mx-3" src="@/assets/image/image_icon.png" alt="">
                         <span>张三身份证.jpg</span>
                       </div>
                       <div class="imagetype">
-                        <img class="mx-3" src="../assets/image/image_icon.png" alt="">
+                        <img class="mx-3" src="@/assets/image/image_icon.png" alt="">
                         <span>张三身份证.jpg</span>
                       </div>
                       <div class="imagetype">
-                        <img class="mx-3" src="../assets/image/image_icon.png" alt="">
+                        <img class="mx-3" src="@/assets/image/image_icon.png" alt="">
                         <span>张三身份证.jpg</span>
                       </div>
                     </div>
@@ -237,7 +237,7 @@
             <div v-if="wenjianFlag" class="wenjian">
               <div class="flex justify-between items-start px-10 py-10">
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/back_icon.png" alt="">
+                  <img class="mr-3" src="@/assets/image/back_icon.png" alt="">
                   <span @click="goBack" class="text-lg cursor-pointer text-gray-500">返回</span>
                 </div>
                 <div class="text-center">
@@ -246,11 +246,11 @@
                 </div>
                 <div class="text-left">
                   <div class="flex justify-start items-center mb-5">
-                    <img class="mr-3" src="../assets/image/upload_icon.png" alt="">
+                    <img class="mr-3" src="@/assets/image/upload_icon.png" alt="">
                     <span class="text-base text-gray-500">上传文件</span>
                   </div>
                   <div class="flex justify-start items-center">
-                    <img class="mr-3" src="../assets/image/addfile_icon.png" alt="">
+                    <img class="mr-3" src="@/assets/image/addfile_icon.png" alt="">
                     <span class="text-base text-gray-500">新建文件夹</span>
                   </div>
                 </div>
@@ -258,11 +258,11 @@
               <div class="wenjian_min px-10 pb-10">
                 <div class="flex justify-end items-center">
                   <div class="flex items-center mr-5">
-                    <img class="mr-2" src="../assets/image/liebiao_icon.png" alt="">
+                    <img class="mr-2" src="@/assets/image/liebiao_icon.png" alt="">
                     <h2 class="text-red-500 font-bold">列表模式</h2>
                   </div>
                   <div class="flex items-center">
-                    <img class="mr-2" src="../assets/image/suolue_icon.png" alt="">
+                    <img class="mr-2" src="@/assets/image/suolue_icon.png" alt="">
                     <h2 class="text-gray-400">缩略图模式</h2>
                   </div>
                 </div>
@@ -280,7 +280,7 @@
                       <ul>
                         <li class="text-base flex justify-center items-center text-gray-500 py-2 border-b border-gray-300">
                           <div class="w-1/4 text-left flex items-center">
-                            <img class="mr-2" src="../assets/image/file_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/file_icon.png" alt="">
                             <h2 @click="goCon" class="text-gray-700 text-sm cursor-pointer">委托手续</h2>
                           </div>
                           <span class="w-1/4 text-center text-sm text-gray-600">3</span>
@@ -292,13 +292,13 @@
                                 <span @click="textbtn" class="px-2 cursor-pointer border-r">置顶</span>
                                 <span class="px-2 cursor-pointer ">删除</span>
                               </div>
-                              <img class="mx-auto cursor-pointer" src="../assets/image/soon_icon.png" alt="">
+                              <img class="mx-auto cursor-pointer" src="@/assets/image/soon_icon.png" alt="">
                             </el-tooltip>
                           </div>
                         </li>
                         <li class="text-base flex justify-center items-center text-gray-500 py-2 border-b border-gray-300">
                           <div class="w-1/4 text-left flex items-center">
-                            <img class="mr-2" src="../assets/image/file_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/file_icon.png" alt="">
                             <h2 @click="goCon" class="text-gray-700 text-sm cursor-pointer">委托手续</h2>
                           </div>
                           <span class="w-1/4 text-center text-sm text-gray-600">3</span>
@@ -310,13 +310,13 @@
                                 <span @click="textbtn" class="px-2 cursor-pointer border-r">置顶</span>
                                 <span class="px-2 cursor-pointer ">删除</span>
                               </div>
-                              <img class="mx-auto cursor-pointer" src="../assets/image/soon_icon.png" alt="">
+                              <img class="mx-auto cursor-pointer" src="@/assets/image/soon_icon.png" alt="">
                             </el-tooltip>
                           </div>
                         </li>
                         <li class="text-base flex justify-center items-center text-gray-500 py-2 border-b border-gray-300">
                           <div class="w-1/4 text-left flex items-center">
-                            <img class="mr-2" src="../assets/image/file_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/file_icon.png" alt="">
                             <h2 @click="goCon" class="text-gray-700 text-sm cursor-pointer">委托手续</h2>
                           </div>
                           <span class="w-1/4 text-center text-sm text-gray-600">3</span>
@@ -328,7 +328,7 @@
                                 <span @click="textbtn" class="px-2 cursor-pointer border-r">置顶</span>
                                 <span class="px-2 cursor-pointer ">删除</span>
                               </div>
-                              <img class="mx-auto cursor-pointer" src="../assets/image/soon_icon.png" alt="">
+                              <img class="mx-auto cursor-pointer" src="@/assets/image/soon_icon.png" alt="">
                             </el-tooltip>
                           </div>
                         </li>
@@ -342,19 +342,19 @@
             <div v-if="notaskFlag" class="mx-auto notask" >
               <div class="flex justify-between items-center px-10 py-10">
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/back_icon.png" alt="">
+                  <img class="mr-3" src="@/assets/image/back_icon.png" alt="">
                   <span @click="goBack" class="text-lg cursor-pointer">返回</span>
                 </div>
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/duoxuankuangqueding.png" alt="">
+                  <img class="mr-3" src="@/assets/image/duoxuankuangqueding.png" alt="">
                   <h2 class="text-2xl text-red-500 font-bold">确认管辖法院</h2>
                 </div>
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/edit_icon.png" alt="">
+                  <img class="mr-3" src="@/assets/image/edit_icon.png" alt="">
                   <span @click="openrizhiForm" class="text-lg">填写日志</span>
                 </div>
               </div>
-              <img class="mt-10 notaskimg" src="../assets/image/notasklog.png" alt="">
+              <img class="mt-10 notaskimg" src="@/assets/image/notasklog.png" alt="">
             </div>
           </div>
         </div>
@@ -363,7 +363,7 @@
     <!-- 任务日志弹窗 -->
     <el-dialog title="" :visible.sync="dialogLog" center width="720px">
       <div class="flex justify-center items-center py-2">
-        <img v-if="checkedLog" class="mr-2" src="../assets/image/duoxuankuangqueding.png" alt="">
+        <img v-if="checkedLog" class="mr-2" src="@/assets/image/duoxuankuangqueding.png" alt="">
         <span class="text-xl text-red-500">确定管辖法院</span>
       </div>
       <h2 class="text-lg text-center pb-4 pt-2">张三诉讼李四  离婚纠纷案</h2>
@@ -428,7 +428,7 @@
 </template>
 
 <script>
-  import head_common from "./partials/head_common.vue"
+  import head_common from "@/components/partials/head_common.vue"
   import {addInspectionTask, deleteInspectionTask, selectInspectionTask, selectSurplusInspectionTask} from '@/api/api/requestLogin.js' // 添加，删除，查找项目自检项
   export default{
     name:'TaskManagement',
@@ -477,9 +477,25 @@
       }
     },
     mounted(){
-
+      this.getRouterData()
     },
     methods:{
+      getRouterData () {
+        const nav = this.$route.query.nav
+        if(nav ==1){
+          this.active =1
+          this.xinxiFlag = true
+          this.rizhiFlag = false
+          this.wenjianFlag = false
+          this.notaskFlag = false
+        } else if(nav ==2){
+          this.active =2
+          this.xinxiFlag = false
+          this.rizhiFlag = true
+          this.wenjianFlag = false
+          this.notaskFlag = false
+        }
+      },
       // 左侧导航切换
       checkTab (e) {
         if(e==1){
@@ -495,11 +511,7 @@
           this.wenjianFlag = false
           this.notaskFlag = false
         } else if (e==3){
-          this.active =3
-          this.xinxiFlag = false
-          this.rizhiFlag = false
-          this.wenjianFlag = true
-          this.notaskFlag = false
+          this.$router.replace('/TaskFileall')
         }
       },
       textbtn () { // 重命名
@@ -538,6 +550,9 @@
         this.logForm.zijianxiang = []; // 自检项
       },
       // 分页
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       },

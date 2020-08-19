@@ -8,8 +8,8 @@
             <ul>
               <li class="select">
                 <span :class="{active:ins==1}" @click="changeSelect">{{ myjobtitle }}</span>
-                <img class="ml-2" v-if="!select" src="../assets/image/down_icon_dark.png" alt="">
-                <img class="ml-2" v-if="select" src="../assets/image/down_icon_red.png" alt="">
+                <img class="ml-2" v-if="!select" src="@/assets/image/down_icon_dark.png" alt="">
+                <img class="ml-2" v-if="select" src="@/assets/image/down_icon_red.png" alt="">
                 <div class="selectbox" v-if="select">
                   <ul>
                     <li v-for="(item, index) in Myjob" :key="index" @click="chooseAboutme(item)">{{ item.name }}</li>
@@ -19,8 +19,8 @@
               <li class="selectRenWu">
                 <span :class="{active:ins==2}" @click="changeSelectRenWu">{{ changeSelectRenWuTitle }}</span>
                 <span class="missMsg">{{ changeSelectNum }}</span>
-                <img class="ml-2" v-if="!selectRenWu" src="../assets/image/down_icon_dark.png" alt="">
-                <img class="ml-2" v-if="selectRenWu" src="../assets/image/down_icon_red.png" alt="">
+                <img class="ml-2" v-if="!selectRenWu" src="@/assets/image/down_icon_dark.png" alt="">
+                <img class="ml-2" v-if="selectRenWu" src="@/assets/image/down_icon_red.png" alt="">
                 <div class="selectRenWubox" v-if="selectRenWu">
                   <ul>
                     <li @click="chooseRenWu(item)" v-for="(item, index) in RenWu" :key="index">{{ item.name }}</li>
@@ -43,7 +43,7 @@
             </div>
             <div class="searchBox">
               <input class="" v-model="searchMsg" type="text">
-              <img @click="searchList" src="../assets/image/search_icon.png" alt="">
+              <img @click="searchList" src="@/assets/image/search_icon.png" alt="">
             </div>
           </div>
         </div>
@@ -77,10 +77,10 @@
                     <!-- status 0信息未填完任务 1开始任务 2完成任务 3延期任务 4过期任务 9删除任务 -->
                     <!-- "type"://1独立任务 2项目任务 3协作任务 -->
                     <!-- rmtIs  1风控  0 无风险 -->
-                      <img v-if="item.status==4" src="../assets/image/guo_icon.png" alt="">
-                      <img  v-if="item.rmtIs==1" src="../assets/image/feng_icon.png" alt="">
-                      <img v-if="item.type==3" src="../assets/image/xie_icon.png" alt="">
-                      <img v-if="item.status==3" src="../assets/image/yan_icon.png" alt="">
+                      <img v-if="item.status==4" src="@/assets/image/guo_icon.png" alt="">
+                      <img  v-if="item.rmtIs==1" src="@/assets/image/feng_icon.png" alt="">
+                      <img v-if="item.type==3" src="@/assets/image/xie_icon.png" alt="">
+                      <img v-if="item.status==3" src="@/assets/image/yan_icon.png" alt="">
                   </h3>
                   <p>{{ item.description }}</p>
                 </div>
@@ -91,11 +91,11 @@
                     <li></li>
                     <li></li>
                     <li>
-                      <img @click="configBtn(item)" src="../assets/image/ren_04.png" alt="">
+                      <img @click="configBtn(item)" src="@/assets/image/ren_04.png" alt="">
                     </li>
                     <!-- 删除任务 -->
                     <li>
-                      <img @click="removeAction(item, index)" src="../assets/image/ren_05.png" alt="">
+                      <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
                     </li>
                   </ul>
                 </div>
@@ -108,7 +108,7 @@
               <li v-for="(item, index) in toDay" :key="index">
                 <div class="duocuankuangBox">
                   <div class="duocuankuang">
-                    <img v-if="myjobId == 2 " @click="addLogOne(item)" src="../assets/image/duoxuankuang.png" alt="">
+                    <img v-if="myjobId == 2 " @click="addLogOne(item)" src="@/assets/image/duoxuankuang.png" alt="">
                   </div>
                 </div>
                 <div class="con_list_i" >
@@ -127,10 +127,10 @@
                     <!-- status 0信息未填完任务 1开始任务 2完成任务 3延期任务 4过期任务 9删除任务 -->
                     <!-- "type"://1独立任务 2项目任务 3协作任务 -->
                     <!-- rmtIs  1风控  0 无风险 -->
-                      <img v-if="item.status==4" src="../assets/image/guo_icon.png" alt="">
-                      <img  v-if="item.rmtIs==1" src="../assets/image/feng_icon.png" alt="">
-                      <img v-if="item.type==3" src="../assets/image/xie_icon.png" alt="">
-                      <img v-if="item.status==3" src="../assets/image/yan_icon.png" alt="">
+                      <img v-if="item.status==4" src="@/assets/image/guo_icon.png" alt="">
+                      <img  v-if="item.rmtIs==1" src="@/assets/image/feng_icon.png" alt="">
+                      <img v-if="item.type==3" src="@/assets/image/xie_icon.png" alt="">
+                      <img v-if="item.status==3" src="@/assets/image/yan_icon.png" alt="">
                   </h3>
                   <p>{{ item.description }}</p>
                 </div>
@@ -147,24 +147,24 @@
                           <p class="mb-1">任务耗时：2天</p>
                           <p class="mb-1">任务剩余：3天</p>
                         </div>
-                        <img src="../assets/image/ren_01.png" alt="">
+                        <img src="@/assets/image/ren_01.png" alt="">
                       </el-tooltip>
                     </li>
                     <!-- 任务日志 -->
                     <li>
-                      <img src="../assets/image/ren_02.png" alt="">
+                      <img src="@/assets/image/ren_02.png" alt="">
                     </li>
                     <!-- 发起讨论/发起协作 -->
                     <li>
                       <el-dropdown trigger="click">
-                        <img class="el-dropdown-link" src="../assets/image/ren_03.png" alt="">
+                        <img class="el-dropdown-link" src="@/assets/image/ren_03.png" alt="">
                         <el-dropdown-menu>
                           <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="../assets/image/team_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
                             <span @click="InitiateDiscussion">发起讨论</span>
                           </el-dropdown-item>
                           <!-- <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="../assets/image/team_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
                             <span @click="InitiateCollaboration">
                               发起协作
                             </span>
@@ -174,11 +174,11 @@
                     </li>
                     <!-- 修改任务 -->
                     <li>
-                      <img @click="configBtn(item)" src="../assets/image/ren_04.png" alt="">
+                      <img @click="configBtn(item)" src="@/assets/image/ren_04.png" alt="">
                     </li>
                     <!-- 删除任务 -->
                     <li>
-                      <img @click="removeAction(item, index)" src="../assets/image/ren_05.png" alt="">
+                      <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
                     </li>
                   </ul>
                 </div>
@@ -191,7 +191,7 @@
               <li v-for="(item, index) in nearDay" :key="index">
                 <div class="duocuankuangBox">
                   <div class="duocuankuang">
-                    <img  v-if="myjobId == 2 " @click="addLogOne(item)" src="../assets/image/duoxuankuang.png" alt="">
+                    <img  v-if="myjobId == 2 " @click="addLogOne(item)" src="@/assets/image/duoxuankuang.png" alt="">
                   </div>
                 </div>
                 <div class="con_list_i" >
@@ -210,10 +210,10 @@
                     <!-- status 0信息未填完任务 1开始任务 2完成任务 3延期任务 4过期任务 9删除任务 -->
                     <!-- "type"://1独立任务 2项目任务 3协作任务 -->
                     <!-- rmtIs  1风控  0 无风险 -->
-                      <img v-if="item.status==4" src="../assets/image/guo_icon.png" alt="">
-                      <img  v-if="item.rmtIs==1" src="../assets/image/feng_icon.png" alt="">
-                      <img v-if="item.type==3" src="../assets/image/xie_icon.png" alt="">
-                      <img v-if="item.status==3" src="../assets/image/yan_icon.png" alt="">
+                      <img v-if="item.status==4" src="@/assets/image/guo_icon.png" alt="">
+                      <img  v-if="item.rmtIs==1" src="@/assets/image/feng_icon.png" alt="">
+                      <img v-if="item.type==3" src="@/assets/image/xie_icon.png" alt="">
+                      <img v-if="item.status==3" src="@/assets/image/yan_icon.png" alt="">
                   </h3>
                   <p>{{ item.description }}</p>
                 </div>
@@ -230,23 +230,23 @@
                           <p class="mb-1">任务耗时：2天</p>
                           <p class="mb-1">任务剩余：3天</p>
                         </div>
-                        <img src="../assets/image/ren_01.png" alt="">
+                        <img src="@/assets/image/ren_01.png" alt="">
                       </el-tooltip>
 
                     </li>
                     <li>
-                      <img src="../assets/image/ren_02.png" alt="">
+                      <img src="@/assets/image/ren_02.png" alt="">
                     </li>
                     <li>
                       <el-dropdown trigger="click">
-                        <img class="el-dropdown-link" src="../assets/image/ren_03.png" alt="">
+                        <img class="el-dropdown-link" src="@/assets/image/ren_03.png" alt="">
                         <el-dropdown-menu>
                           <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="../assets/image/team_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
                             <span @click="InitiateDiscussion">发起讨论</span>
                           </el-dropdown-item>
                           <!-- <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="../assets/image/team_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
                             <span @click="InitiateCollaboration">
                               发起协作
                             </span>
@@ -255,10 +255,10 @@
                       </el-dropdown>
                     </li>
                     <li>
-                      <img src="../assets/image/ren_04.png" alt="">
+                      <img src="@/assets/image/ren_04.png" alt="">
                     </li>
                     <li>
-                      <img @click="removeAction(item, index)" src="../assets/image/ren_05.png" alt="">
+                      <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
                     </li>
                   </ul>
                 </div>
@@ -271,7 +271,7 @@
               <li v-for="(item, index) in futureDay" :key="index">
                 <div class="duocuankuangBox">
                   <div class="duocuankuang">
-                    <img v-if="myjobId == 2 " @click="addLogOne(item)" src="../assets/image/duoxuankuang.png" alt="">
+                    <img v-if="myjobId == 2 " @click="addLogOne(item)" src="@/assets/image/duoxuankuang.png" alt="">
                   </div>
                 </div>
                 <div class="con_list_i" >
@@ -290,10 +290,10 @@
                     <!-- status 0信息未填完任务 1开始任务 2完成任务 3延期任务 4过期任务 9删除任务 -->
                     <!-- "type"://1独立任务 2项目任务 3协作任务 -->
                     <!-- rmtIs  1风控  0 无风险 -->
-                      <img v-if="item.status==4" src="../assets/image/guo_icon.png" alt="">
-                      <img  v-if="item.rmtIs==1" src="../assets/image/feng_icon.png" alt="">
-                      <img v-if="item.type==3" src="../assets/image/xie_icon.png" alt="">
-                      <img v-if="item.status==3" src="../assets/image/yan_icon.png" alt="">
+                      <img v-if="item.status==4" src="@/assets/image/guo_icon.png" alt="">
+                      <img  v-if="item.rmtIs==1" src="@/assets/image/feng_icon.png" alt="">
+                      <img v-if="item.type==3" src="@/assets/image/xie_icon.png" alt="">
+                      <img v-if="item.status==3" src="@/assets/image/yan_icon.png" alt="">
                   </h3>
                   <p>{{ item.description }}</p>
                 </div>
@@ -310,23 +310,23 @@
                           <p class="mb-1">任务耗时：2天</p>
                           <p class="mb-1">任务剩余：3天</p>
                         </div>
-                        <img src="../assets/image/ren_01.png" alt="">
+                        <img src="@/assets/image/ren_01.png" alt="">
                       </el-tooltip>
                     </li>
                     <li>
-                      <img src="../assets/image/ren_02.png" alt="">
+                      <img src="@/assets/image/ren_02.png" alt="">
                     </li>
                     <!-- 发起讨论/发起协作 -->
                     <li>
                       <el-dropdown trigger="click">
-                        <img class="el-dropdown-link" src="../assets/image/ren_03.png" alt="">
+                        <img class="el-dropdown-link" src="@/assets/image/ren_03.png" alt="">
                         <el-dropdown-menu>
                           <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="../assets/image/team_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
                             <span @click="InitiateDiscussion">发起讨论</span>
                           </el-dropdown-item>
                           <!-- <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="../assets/image/team_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
                             <span @click="InitiateCollaboration">
                               发起协作
                             </span>
@@ -335,10 +335,10 @@
                       </el-dropdown>
                     </li>
                     <li>
-                      <img src="../assets/image/ren_04.png" alt="">
+                      <img src="@/assets/image/ren_04.png" alt="">
                     </li>
                     <li>
-                      <img @click="removeAction(item, index)" src="../assets/image/ren_05.png" alt="">
+                      <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
                     </li>
                   </ul>
                 </div>
@@ -351,7 +351,7 @@
               <li v-for="(item, index) in endDay" :key="index">
                 <div class="duocuankuangBox">
                   <div class="duocuankuang">
-                    <img src="../assets/image/duoxuankuangqueding.png" alt="">
+                    <img src="@/assets/image/duoxuankuangqueding.png" alt="">
                   </div>
                 </div>
                 <div class="con_list_i" >
@@ -370,17 +370,17 @@
                     <!-- status 0信息未填完任务 1开始任务 2完成任务 3延期任务 4过期任务 9删除任务 -->
                     <!-- "type"://1独立任务 2项目任务 3协作任务 -->
                     <!-- rmtIs  1风控  0 无风险 -->
-                      <img v-if="item.status==4" src="../assets/image/guo_icon.png" alt="">
-                      <img  v-if="item.rmtIs==1" src="../assets/image/feng_icon.png" alt="">
-                      <img v-if="item.type==3" src="../assets/image/xie_icon.png" alt="">
-                      <img v-if="item.status==3" src="../assets/image/yan_icon.png" alt="">
+                      <img v-if="item.status==4" src="@/assets/image/guo_icon.png" alt="">
+                      <img  v-if="item.rmtIs==1" src="@/assets/image/feng_icon.png" alt="">
+                      <img v-if="item.type==3" src="@/assets/image/xie_icon.png" alt="">
+                      <img v-if="item.status==3" src="@/assets/image/yan_icon.png" alt="">
                   </h3>
                   <p>{{ item.description }}</p>
                 </div>
                 <div class="con_list_r">
                   <ul>
                     <li>
-                      <img src="../assets/image/recover_icon.png" alt="">
+                      <img src="@/assets/image/recover_icon.png" alt="">
                     </li>
                   </ul>
                 </div>
@@ -394,8 +394,8 @@
             <ul>
               <li v-for="(item, index) in selectOnlyTask" :key="index">
                 <div class="duocuankuangBox">
-                   <img v-if="myjobId == 2 && changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4 " @click="addLogOne(item)" src="../assets/image/duoxuankuang.png" alt="">
-                   <img v-if="changeSelectRenWuID == 5" src="../assets/image/duoxuankuangqueding.png" alt="">
+                   <img v-if="myjobId == 2 && changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4 " @click="addLogOne(item)" src="@/assets/image/duoxuankuang.png" alt="">
+                   <img v-if="changeSelectRenWuID == 5" src="@/assets/image/duoxuankuangqueding.png" alt="">
                 </div>
                 <div class="con_list_i" >
                   <div v-if="item.M !=null">
@@ -413,10 +413,10 @@
                   <!-- status 0信息未填完任务 1开始任务 2完成任务 3延期任务 4过期任务 9删除任务 -->
                   <!-- "type"://1独立任务 2项目任务 3协作任务 -->
                   <!-- rmtIs  1风控  0 无风险 -->
-                    <img v-if="item.status==4" src="../assets/image/guo_icon.png" alt="">
-                    <img  v-if="item.rmtIs==1" src="../assets/image/feng_icon.png" alt="">
-                    <img v-if="item.type==3" src="../assets/image/xie_icon.png" alt="">
-                    <img v-if="item.status==3" src="../assets/image/yan_icon.png" alt="">
+                    <img v-if="item.status==4" src="@/assets/image/guo_icon.png" alt="">
+                    <img  v-if="item.rmtIs==1" src="@/assets/image/feng_icon.png" alt="">
+                    <img v-if="item.type==3" src="@/assets/image/xie_icon.png" alt="">
+                    <img v-if="item.status==3" src="@/assets/image/yan_icon.png" alt="">
                   </h3>
                   <p>{{ item.description }}</p>
                 </div>
@@ -433,24 +433,24 @@
                           <p class="mb-1">任务耗时：2天</p>
                           <p class="mb-1">任务剩余：3天</p>
                         </div>
-                        <img src="../assets/image/ren_01.png" alt="">
+                        <img src="@/assets/image/ren_01.png" alt="">
                       </el-tooltip>
                     </li>
                     <!-- 任务日志 -->
                     <li v-if="changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4 || changeSelectRenWuID == 6">
-                      <img @click="addLog(item)" src="../assets/image/ren_02.png" alt="">
+                      <img @click="addLog(item)" src="@/assets/image/ren_02.png" alt="">
                     </li>
                     <!-- 发起讨论/发起协作 -->
                     <li v-if="changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4">
                       <el-dropdown trigger="click">
-                        <img class="el-dropdown-link" src="../assets/image/ren_03.png" alt="">
+                        <img class="el-dropdown-link" src="@/assets/image/ren_03.png" alt="">
                         <el-dropdown-menu>
                           <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="../assets/image/team_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
                             <span @click="InitiateDiscussion">发起讨论</span>
                           </el-dropdown-item>
                           <!-- <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="../assets/image/team_icon.png" alt="">
+                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
                             <span @click="InitiateCollaboration">
                               发起协作
                             </span>
@@ -460,11 +460,11 @@
                     </li>
                     <!-- 编辑任务 -->
                     <li v-if="changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4 || changeSelectRenWuID == 6">
-                      <img @click="configBtn(item)" src="../assets/image/ren_04.png" alt="">
+                      <img @click="configBtn(item)" src="@/assets/image/ren_04.png" alt="">
                     </li>
                     <!-- 删除任务 -->
                     <li v-if="changeSelectRenWuID != 7 && changeSelectRenWuID != 5">
-                      <img @click="removeAction(item, index)" src="../assets/image/ren_05.png" alt="">
+                      <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
                     </li>
                     <!-- 恢复任务 -->
                     <li v-if="changeSelectRenWuID == 7 || changeSelectRenWuID == 5">
@@ -477,7 +477,7 @@
                           <el-button size="mini" type="text" @click="visible = false">取消</el-button>
                           <el-button type="primary" size="mini"  @click="recoverAction(item.id)">确定</el-button>
                         </div>
-                        <img slot="reference" src="../assets/image/resetCover_icon.png" alt="">
+                        <img slot="reference" src="@/assets/image/resetCover_icon.png" alt="">
                       </el-popover>
                     </li>
                   </ul>
@@ -487,7 +487,7 @@
           </div>
         </div>
         <div class="mx-auto notask" v-if="this.changeSelectNum == 0">
-          <img class="mt-10" src="../assets/image/notask.png" alt="">
+          <img class="mt-10" src="@/assets/image/notask.png" alt="">
         </div>
       </div>
     </div>
@@ -555,8 +555,8 @@
             </el-option>
           </el-select>
           <div class="addIconBox">
-            <img src="../assets/image/delete_icon.png" alt="">
-            <img src="../assets/image/add_icon.png" alt="">
+            <img src="@/assets/image/delete_icon.png" alt="">
+            <img src="@/assets/image/add_icon.png" alt="">
           </div>
         </el-form-item>
         <el-form-item label="审核人" :label-width="formLabelWidth">
@@ -609,8 +609,8 @@
               <li v-for="(item, index) in InspectionTaskAll" :key="index" class="flex justify-around py-2">
                 <p class="w-5/6">{{ item.title }}</p>
                 <div class="w-1/6">
-                  <img class="mr-3 inline-block" @click="removeInspectionTask(item.id)" src="../assets/image/delete_icon.png" alt="">
-                  <!-- <img class="inline-block" src="../assets/image/add_icon.png" alt=""> -->
+                  <img class="mr-3 inline-block" @click="removeInspectionTask(item.id)" src="@/assets/image/delete_icon.png" alt="">
+                  <!-- <img class="inline-block" src="@/assets/image/add_icon.png" alt=""> -->
                 </div>
               </li>
             </ul>
@@ -631,7 +631,7 @@
     <!-- 任务日志弹窗 -->
     <el-dialog title="" :visible.sync="dialogLog" center width="720px">
       <div class="flex justify-center items-center py-2">
-        <img v-if="checkedLog" class="mr-2" src="../assets/image/duoxuankuangqueding.png" alt="">
+        <img v-if="checkedLog" class="mr-2" src="@/assets/image/duoxuankuangqueding.png" alt="">
         <span class="text-xl text-red-500">确定管辖法院</span>
       </div>
       <h2 class="text-lg text-center pb-4 pt-2">张三诉讼李四  离婚纠纷案</h2>
@@ -696,7 +696,7 @@
 </template>
 
 <script>
-  import head_common from "./partials/head_common.vue"
+  import head_common from "@/components/partials/head_common.vue"
   import {addTask, updateTask, recoveryDeleteTask} from '@/api/api/requestLogin.js' // 新增任务
   import {deleteTask} from '@/api/api/requestLogin.js' // 删除任务
   import {selectTask} from '@/api/api/requestLogin.js' // 通过任务类型查询任务列表
@@ -1523,7 +1523,7 @@
                   height: 40px;
                   text-align: center;
                   line-height: 30px;
-                  background:url(../assets/image/toother.png)no-repeat;
+                  background:url(../../assets/image/toother.png)no-repeat;
                   span{
                     color:#3489e8;
                     display: inline;
@@ -1536,7 +1536,7 @@
                   height: 40px;
                   text-align: center;
                   line-height: 45px;
-                  background:url(../assets/image/tome.png)no-repeat;
+                  background:url(../../assets/image/tome.png)no-repeat;
                   span{
                     color:#00baa2;
                     display: inline;

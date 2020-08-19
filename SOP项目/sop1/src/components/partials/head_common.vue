@@ -24,14 +24,23 @@
              <img class="ml-1" src="../../assets/image/down_icon.png" alt="">
            </div> -->
            <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../../assets/image/msg_icon.png" alt="">
+             <img @click="goMessageAc" src="../../assets/image/msg_icon.png" alt="">
              <img class="ml-1" src="../../assets/image/down_icon.png" alt="">
            </div>
            <!-- <span class="text-base ml-6 mr-4">
              常用工具
            </span> -->
            <div class="cursor-pointer mr-2">
-             <img src="../../assets/image/list_icon.png" alt="">
+             <el-dropdown>
+               <span class="el-dropdown-link text-base">
+                 <img src="../../assets/image/list_icon.png" alt="">
+               </span>
+               <el-dropdown-menu slot="dropdown" class="taolun" width="100px">
+                 <div class="a" @click="layout" style="width: 100px;cursor: pointer;font-size:14px;text-align:center;line-height:20px">退出</div>
+                 <!-- <div class="a b" disabled style="width: 100px;font-size:14px;text-align:center;line-height:30px">发起讨论</div> -->
+               </el-dropdown-menu>
+             </el-dropdown>
+
            </div>
         </div>
       </div>
@@ -49,32 +58,37 @@
         </div>
         <div class="head_m_r">
           <ul>
-          	<li>
-              <img src="../../assets/image/renwu_icon01.png" alt="">
+          	<li @click="tabChange(1)">
+              <img src="@/assets/image/renwu_icon01.png" alt="">
               <p>任务管理</p>
             </li>
-            <li>
-              <img src="../../assets/image/xiangmu_icon02.png" alt="">
+            <li @click="tabChange(2)">
+              <img src="@/assets/image/xiangmu_icon02.png" alt="">
               <p>项目管理</p>
             </li>
-            <li>
-              <img src="../../assets/image/zhishi_icon01.png" alt="">
+            <li @click="tabChange(3)">
+              <img src="@/assets/image/zhishi_icon01.png" alt="">
               <p>知识管理</p>
             </li>
-            <li>
-              <img src="../../assets/image/shiwu_icon01.png" alt="">
+            <li @click="tabChange(4)">
+              <img src="@/assets/image/shiwu_icon01.png" alt="">
               <p>事务管理</p>
             </li>
           </ul>
         </div>
       </div>
     </div>
+    <tishi-box></tishi-box>
   </div>
 </template>
 
 <script>
+  import tishi_box from "@/components/partials/tishi_box.vue"
   export default{
     name: 'head_common',
+    components:{
+      'tishi-box': tishi_box
+    },
     data() {
       return {
         name: localStorage.getItem('name'),
@@ -87,12 +101,25 @@
       this.getName()
     },
     methods:{
+      layout () {
+        alert('退出登录')
+      },
       getName () {
         this.shortName = this.name.slice(1)  // 截取用户姓名后两位
       },
       goTalkAc () {
         this.talkFlag = !this.talkFlag
         this.$router.replace('/taskTalkModel')
+      },
+      goMessageAc () {
+        this.$router.replace('/messageList')
+      },
+      tabChange (e) {
+        if(e==1){
+          this.$router.replace('/TaskManagement')
+        } else if (e==2){
+          this.$router.replace('/projectManagement')
+        }
       }
     }
   }

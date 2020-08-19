@@ -1,87 +1,21 @@
 <template>
   <div class="all">
-    <div class="head_top w-full bg-white-500">
-      <div class="head_top_min">
-        <div class="head_t_l">
-          <img class="ml-2" src="../assets/image/sun_icon.png" alt="">
-          <span>晴</span>
-          <span>13℃-25℃</span>
-          <span>请注意，大风蓝色预警</span>
-        </div>
-        <div class="head_t_r">
-           <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../assets/image/new_msg_icon.png" alt="">
-             <img class="ml-1" src="../assets/image/down_icon.png" alt="">
-           </div>
-           <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../assets/image/date_icon.png" alt="">
-             <img class="ml-1" src="../assets/image/down_icon.png" alt="">
-           </div>
-           <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../assets/image/question_icon.png" alt="">
-             <img class="ml-1" src="../assets/image/down_icon.png" alt="">
-           </div>
-           <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../assets/image/msg_icon.png" alt="">
-             <img class="ml-1" src="../assets/image/down_icon.png" alt="">
-           </div>
-           <span class="text-base ml-6 mr-4">
-             常用工具
-           </span>
-           <div class="cursor-pointer mr-2">
-             <img src="../assets/image/list_icon.png" alt="">
-           </div>
-        </div>
-      </div>
-    </div>
-    <div class="head_mid w-full">
-      <div class="head_mid_min">
-        <div class="head_m_l">
-          <div>
-            {{shortName}}
-          </div>
-          <dl>
-            <dt>下午好,<span>{{name}}</span></dt>
-            <dd class="hidden">今天是公元二零二零年四月二十九日，是您的生日，祝您生日快乐！</dd>
-          </dl>
-        </div>
-        <div class="head_m_r">
-          <ul>
-          	<li>
-              <img src="../assets/image/renwu_icon01.png" alt="">
-              <p>任务管理</p>
-            </li>
-            <li>
-              <img src="../assets/image/xiangmu_icon02.png" alt="">
-              <p>项目管理</p>
-            </li>
-            <li>
-              <img src="../assets/image/zhishi_icon01.png" alt="">
-              <p>知识管理</p>
-            </li>
-            <li>
-              <img src="../assets/image/shiwu_icon01.png" alt="">
-              <p>事务管理</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <head-common></head-common>
     <div class="con w-full">
       <div class="con_min">
         <div class="flex con_minall">
           <div class="con_min_left">
             <ul>
-              <li class="flex justify-center items-center">
-                <img src="../assets/image/msgcheck_icon.png" alt="">
+              <li @click="checkTab(1)" class="flex justify-center items-center">
+                <img src="@/assets/image/msgcheck_icon.png" alt="">
                 <h2>任务信息</h2>
               </li>
-              <li class="flex justify-center items-center">
-                <img src="../assets/image/logcheck_icon.png" alt="">
+              <li @click="checkTab(2)" class="flex justify-center items-center">
+                <img src="@/assets/image/logcheck_icon.png" alt="">
                 <h2>任务日志</h2>
               </li>
-              <li class="flex justify-center items-center bg-white">
-                <img src="../assets/image/filecheck_icon.png" alt="">
+              <li @click="checkTab(3)" class="flex justify-center items-center bg-white">
+                <img src="@/assets/image/filecheck_icon.png" alt="">
                 <h2>任务文件</h2>
               </li>
             </ul>
@@ -91,7 +25,7 @@
             <div v-if="wenjuanList" class="wenjian">
               <div class="flex justify-between items-start px-10 py-10">
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/back_icon.png" alt="">
+                  <img class="mr-3" src="@/assets/image/back_icon.png" alt="">
                   <span @click="goBack" class="text-lg cursor-pointer text-gray-500">返回</span>
                 </div>
                 <div class="text-center">
@@ -99,16 +33,16 @@
                     确认管辖法院
                     <ul class="iconList">
                       <li>
-                        <img src="../assets/image/guo_icon.png" alt="">
+                        <img src="@/assets/image/guo_icon.png" alt="">
                       </li>
                       <li>
-                        <img src="../assets/image/feng_icon.png" alt="">
+                        <img src="@/assets/image/feng_icon.png" alt="">
                       </li>
                       <li>
-                        <img src="../assets/image/xie_icon.png" alt="">
+                        <img src="@/assets/image/xie_icon.png" alt="">
                       </li>
                       <li>
-                        <img src="../assets/image/yan_icon.png" alt="">
+                        <img src="@/assets/image/yan_icon.png" alt="">
                       </li>
                     </ul>
                   </h2>
@@ -116,7 +50,7 @@
                 </div>
                 <div class="text-left">
                   <div class="flex justify-start items-center mb-5">
-                    <img class="mr-3" src="../assets/image/upload_icon.png" alt="">
+                    <img class="mr-3" src="@/assets/image/upload_icon.png" alt="">
                     <span @click="goUpload" class="text-base text-gray-500">上传文件</span>
                   </div>
                 </div>
@@ -124,11 +58,11 @@
               <div class="wenjian_min px-10 pb-10">
                 <div class="flex justify-end items-center">
                   <div class="flex items-center mr-5">
-                    <img class="mr-2" src="../assets/image/liebiao_icon.png" alt="">
+                    <img class="mr-2" src="@/assets/image/liebiao_icon.png" alt="">
                     <h2 class="text-red-500 font-bold">列表模式</h2>
                   </div>
                   <div class="flex items-center">
-                    <img class="mr-2" src="../assets/image/suolue_icon.png" alt="">
+                    <img class="mr-2" src="@/assets/image/suolue_icon.png" alt="">
                     <h2 class="text-gray-400">缩略图模式</h2>
                   </div>
                 </div>
@@ -161,7 +95,7 @@
                           <el-checkbox v-for="(city, index) in cities" :label="city" :key="index" class="w-full">
                             <li class="text-base w-full flex justify-center items-center text-gray-500 py-2 border-b border-gray-300">
                               <div class="w-2/3 text-left flex items-center">
-                                <img class="mr-2" src="../assets/image/word_icon.png" alt="">
+                                <img class="mr-2" src="@/assets/image/word_icon.png" alt="">
                                 <h2 class="text-gray-700 text-sm cursor-pointer">{{city}}</h2>
                               </div>
                               <span class="w-1/5 text-center text-sm text-gray-600">2019-10-19</span>
@@ -173,7 +107,7 @@
                                     <span @click="textbtn" class="px-2 cursor-pointer border-r">重命名</span>
                                     <span @click="textbtn" class="px-2 cursor-pointer">置顶</span>
                                   </div>
-                                  <img class="mx-auto cursor-pointer" src="../assets/image/soon_icon.png" alt="">
+                                  <img class="mx-auto cursor-pointer" src="@/assets/image/soon_icon.png" alt="">
                                 </el-tooltip>
                               </div>
                             </li>
@@ -199,7 +133,7 @@
             <div v-if="shangchuanBox" class="shangchuan">
               <div class="flex justify-between items-start px-10 py-10">
                 <div class="flex justify-center items-center">
-                  <img class="mr-3" src="../assets/image/back_icon.png" alt="">
+                  <img class="mr-3" src="@/assets/image/back_icon.png" alt="">
                   <span @click="goCon" class="text-lg cursor-pointer text-gray-500">返回</span>
                 </div>
                 <div class="text-center">
@@ -294,7 +228,7 @@
       </el-form>
       <div class="py-3 sharename">
         <ul class="flex">
-          <li v-for="(item, index) in sharenameAll" :key="index" class="">{{ item.name }}<img @click="removeShare(index)" src="../assets/image/close_red_icon.png" alt=""></li>
+          <li v-for="(item, index) in sharenameAll" :key="index" class="">{{ item.name }}<img @click="removeShare(index)" src="@/assets/image/close_red_icon.png" alt=""></li>
         </ul>
       </div>
       <div slot="footer" class="dialog-footer pb-4 w-4/5 mx-auto flex justify-around" >
@@ -306,11 +240,14 @@
 </template>
 
 <script>
-
+  import head_common from "@/components/partials/head_common.vue"
   import {addInspectionTask, deleteInspectionTask, selectInspectionTask, selectSurplusInspectionTask} from '@/api/api/requestLogin.js' // 添加，删除，查找项目自检项
   const cityOptions = ['20190925  张力虹  张三离婚纠纷起诉状1.0版', '20190925  张力虹  张三离婚纠纷起诉状2.0版', '20190925  张力虹  张三离婚纠纷起诉状3.0版', '20190925  张力虹  张三离婚纠纷起诉状4.0版'];
   export default{
     name:'TaskManagement',
+    components: {
+      'head-common': head_common
+    },
     data() {
       return {
         visible:false,
@@ -380,11 +317,10 @@
         this.uploadForm.hasright = []
       },
       goUpload () { // 点击上传
-        this.wenjuanList = false
-        this.shangchuanBox = true
+        this.$router.replace("/TaskFileUpload")
       },
       goBack () { // 返回任务管理页面
-        this.$router.replace("/TaskCon")
+        this.$router.replace("/TaskFileall")
       },
       taolun () {
         alert(1)
@@ -479,7 +415,27 @@
             message: '已取消删除'
           });
         });
-      }
+      },
+      // 左侧导航切换
+      checkTab (e) {
+        if(e==1){
+          this.$router.push({
+            path:'/TaskCon',
+            query:{
+              nav: 1
+            }
+          })
+        } else if (e==2){
+         this.$router.push({
+           path:'/TaskCon',
+           query:{
+             nav: 2
+           }
+         })
+        } else if (e==3){
+          this.$router.replace('/TaskFileall')
+        }
+      },
     }
   }
 </script>

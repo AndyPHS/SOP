@@ -1,72 +1,6 @@
 <template>
   <div class="all">
-    <div class="head_top w-full bg-white-500">
-      <div class="head_top_min">
-        <div class="head_t_l">
-          <img class="ml-2" src="../assets/image/sun_icon.png" alt="">
-          <span>晴</span>
-          <span>13℃-25℃</span>
-          <span>请注意，大风蓝色预警</span>
-        </div>
-        <div class="head_t_r">
-           <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../assets/image/new_msg_icon.png" alt="">
-             <img class="ml-1" src="../assets/image/down_icon.png" alt="">
-           </div>
-           <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../assets/image/date_icon.png" alt="">
-             <img class="ml-1" src="../assets/image/down_icon.png" alt="">
-           </div>
-           <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../assets/image/question_icon.png" alt="">
-             <img class="ml-1" src="../assets/image/down_icon.png" alt="">
-           </div>
-           <div class="flex items-center mr-4 cursor-pointer">
-             <img src="../assets/image/msg_icon.png" alt="">
-             <img class="ml-1" src="../assets/image/down_icon.png" alt="">
-           </div>
-           <span class="text-base ml-6 mr-4">
-             常用工具
-           </span>
-           <div class="cursor-pointer mr-2">
-             <img src="../assets/image/list_icon.png" alt="">
-           </div>
-        </div>
-      </div>
-    </div>
-    <div class="head_mid w-full">
-      <div class="head_mid_min">
-        <div class="head_m_l">
-          <div>
-            {{shortName}}
-          </div>
-          <dl>
-            <dt>下午好,<span>{{name}}</span></dt>
-            <dd class="hidden">今天是公元二零二零年四月二十九日，是您的生日，祝您生日快乐！</dd>
-          </dl>
-        </div>
-        <div class="head_m_r">
-          <ul>
-          	<li>
-              <img src="../assets/image/renwu_icon01.png" alt="">
-              <p>任务管理</p>
-            </li>
-            <li>
-              <img src="../assets/image/xiangmu_icon02.png" alt="">
-              <p>项目管理</p>
-            </li>
-            <li>
-              <img src="../assets/image/zhishi_icon01.png" alt="">
-              <p>知识管理</p>
-            </li>
-            <li>
-              <img src="../assets/image/shiwu_icon01.png" alt="">
-              <p>事务管理</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <head-common></head-common>
     <div class="con w-full">
       <div class="con_min">
         <div class="flex con_minall">
@@ -117,11 +51,14 @@
 </template>
 
 <script>
-
+  import head_common from "@/components/partials/head_common.vue"
   import {addInspectionTask, deleteInspectionTask, selectInspectionTask, selectSurplusInspectionTask} from '@/api/api/requestLogin.js' // 添加，删除，查找项目自检项
   const cityOptions = ['20190925  张力虹  张三离婚纠纷起诉状1.0版', '20190925  张力虹  张三离婚纠纷起诉状2.0版', '20190925  张力虹  张三离婚纠纷起诉状3.0版', '20190925  张力虹  张三离婚纠纷起诉状4.0版'];
   export default{
-    name:'TaskManagement',
+    name:'ViewImage',
+    components: {
+      'head-common': head_common
+    },
     data() {
       return {
         name: localStorage.getItem('name'),
