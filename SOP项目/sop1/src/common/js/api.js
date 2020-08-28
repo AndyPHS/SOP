@@ -79,6 +79,38 @@ const apiUrl = {
   updateProject: baseURL + 'project/update_project/',
   // 查询项目
   selectProject: baseURL + 'project/select_project',
+  // 项目类型project/created/
+  projectCreated: baseURL + 'project/created/',
+  // 查询单独项目详细信息/project/select_only_project/{pid}
+  selectOnlyProject: baseURL + 'project/select_only_project/',
+  // 恢复项目project/recovery_delete_project/{pid}
+  recoveryDeleteProject: baseURL + 'project/recovery_delete_project/',
+  // 任务完成度project/select_project_time/
+  selectProjectTime: baseURL + 'project/select_project_time/',
+  // 完成项目project/complete_project/
+  completeProject: baseURL + 'project/complete_project/',
+  // 查看全部项目任务project/projectTask/
+  projectTask: baseURL + 'project/projectTask/',
+  // 查询条件项目任务project/projectTaskType/
+  projectTaskType: baseURL + 'project/projectTaskType/',
+  // 查询分组project/select_project_group/
+  selectProjectGroup: baseURL + 'project/select_project_group/',
+  // 新增分组 project/add_project_group/
+  addProjectGroup: baseURL + 'project/add_project_group/',
+  // 删除分组 project/delete_project_group/
+  deleteProjectGroup: baseURL + 'project/delete_project_group/',
+  // 向下移动分组 project/mv_group/
+  mvGroup: baseURL + 'project/mv_group/',
+
+ // 日志模块
+  // 修改日志journal/update_journal/jid
+  updateJournal: baseURL + 'journal/update_journal/',
+  // 新增日志journal/add_journal
+  addJournal: baseURL + 'journal/add_journal',
+  // 查询日志 journal/select_journal/
+  selectJournal: baseURL + 'journal/select_journal/',
+  // 查询项目全部任务日志journal/select_project_task_jounal_all/
+  selectProjectTaskJounalAll: baseURL + 'journal/select_project_task_jounal_all/',
 
   // 任务模块
   // 新建任务
@@ -93,6 +125,12 @@ const apiUrl = {
   selectTaskOnly: baseURL + 'task/select_task_only/',
   // 恢复任务task/recovery_delete_task/{tid}
   recoveryDeleteTask: baseURL + 'task/recovery_delete_task/',
+  // 完结任务task/task_stop/
+  taskStop: baseURL + 'task/task_stop/',
+  // 催促任务 task/cuicu/
+  cuiCu: baseURL + 'task/cuicu/',
+
+  // 自检项信息
   // 新增任务自检项/task/add_inspection_task/{tid}
   addInspectionTask: baseURL + 'task/add_inspection_task/',
   // 删除任务自检项task/delete_inspection_task/{tid}
@@ -100,7 +138,10 @@ const apiUrl = {
   // 查询任务全部自检项目/task/select_inspection_task/{tid}
   selectInspectionTask: baseURL + 'task/select_inspection_task/',
   // 查询任务剩余自检项task/select_surplus_inspection_task/{tid}
-  selectSurplusInspectionTask: baseURL + 'task/select_surplus_inspection_task/'
+  selectSurplusInspectionTask: baseURL + 'task/select_surplus_inspection_task/',
+  // 修改任务自检项状态task/update_inspection_task_status/
+  updateInspectionTaskStatus: baseURL + 'task/update_inspection_task_status/'
+
 }
 export{
   apiUrl

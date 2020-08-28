@@ -10,10 +10,25 @@
         </div>
         <div class="head_t_r">
            <div class="flex items-center mr-4 cursor-pointer">
-             <img v-if="talkFlag==true" @click="goTalkAc" src="../../assets/image/new_msg_icon.png" alt="">
-             <img v-if="talkFlag==false" @click="goTalkAc" src="../../assets/image/new_msg_active_icon.png" alt="">
-             <img v-if="talkFlag==true" class="ml-1" src="../../assets/image/down_icon.png" alt="">
-             <img v-if="talkFlag==false" class="ml-1" src="../../assets/image/down_active_icon.png" alt="">
+             <!-- <img v-if="talkFlag==true" @click="goTalkAc" src="../../assets/image/new_msg_icon.png" alt="">
+             <img v-if="talkFlag==false" @click="goTalkAc" src="../../assets/image/new_msg_active_icon.png" alt=""> -->
+             <img @click="goTalkAc" class="el-dropdown-link" src="@/assets/image/new_msg_icon.png" alt="">
+             <el-dropdown trigger="click">
+               <img v-if="talkFlag==true" class="ml-1" src="../../assets/image/down_icon.png" alt="">
+               <img v-if="talkFlag==false" class="ml-1" src="../../assets/image/down_active_icon.png" alt="">
+               <el-dropdown-menu>
+                 <el-dropdown-item class="clearfix talkicon">
+                   <!-- <img class="mr-2" src="@/assets/image/team_icon.png" alt=""> -->
+                   <span @click="goTalkAc">讨论</span>
+                 </el-dropdown-item>
+                 <!-- <el-dropdown-item class="clearfix talkicon">
+                   <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
+                   <span @click="InitiateCollaboration">
+                     发起协作
+                   </span>
+                 </el-dropdown-item> -->
+               </el-dropdown-menu>
+             </el-dropdown>
            </div>
            <!-- <div class="flex items-center mr-4 cursor-pointer">
              <img src="../../assets/image/date_icon.png" alt="">
@@ -24,8 +39,22 @@
              <img class="ml-1" src="../../assets/image/down_icon.png" alt="">
            </div> -->
            <div class="flex items-center mr-4 cursor-pointer">
-             <img @click="goMessageAc" src="../../assets/image/msg_icon.png" alt="">
-             <img class="ml-1" src="../../assets/image/down_icon.png" alt="">
+             <img @click="goMessageAc(0)" src="../../assets/image/msg_icon.png" alt="">
+             <el-dropdown trigger="click">
+               <img v-if="talkFlag==true" class="ml-1" src="../../assets/image/down_icon.png" alt="">
+               <img v-if="talkFlag==false" class="ml-1" src="../../assets/image/down_active_icon.png" alt="">
+               <el-dropdown-menu>
+                 <el-dropdown-item class="clearfix talkicon">
+                   <span @click="goMessageAc(1)">系统通知</span>
+                 </el-dropdown-item>
+                 <el-dropdown-item class="clearfix talkicon">
+                   <span @click="goMessageAc(2)">公告消息</span>
+                 </el-dropdown-item>
+                 <el-dropdown-item class="clearfix talkicon">
+                   <span @click="goMessageAc(3)">分享消息</span>
+                 </el-dropdown-item>
+               </el-dropdown-menu>
+             </el-dropdown>
            </div>
            <!-- <span class="text-base ml-6 mr-4">
              常用工具
@@ -59,12 +88,14 @@
         <div class="head_m_r">
           <ul>
           	<li @click="tabChange(1)">
-              <img src="@/assets/image/renwu_icon01.png" alt="">
-              <p>任务管理</p>
+              <img v-if="renwu==false" src="@/assets/image/renwu_icon01.png" alt="">
+              <img v-if="renwu==true" src="@/assets/image/renwu_active_icon01.png" alt="">
+              <p :class="renwu==true?'active':'default_active' ">任务管理</p>
             </li>
             <li @click="tabChange(2)">
-              <img src="@/assets/image/xiangmu_icon02.png" alt="">
-              <p>项目管理</p>
+              <img v-if="xiangmu==false" src="@/assets/image/xiangmu_icon02.png" alt="">
+              <img v-if="xiangmu==true" src="@/assets/image/xiangmu_active_icon02.png" alt="">
+              <p :class="xiangmu==true?'active':'default_active' ">项目管理</p>
             </li>
             <li @click="tabChange(3)">
               <img src="@/assets/image/zhishi_icon01.png" alt="">
@@ -89,6 +120,11 @@
     components:{
       'tishi-box': tishi_box
     },
+    props: {
+      renwu: Boolean,
+      xiangmu: Boolean,
+      required: true
+    },
     data() {
       return {
         name: localStorage.getItem('name'),
@@ -106,19 +142,37 @@
       },
       getName () {
         this.shortName = this.name.slice(1)  // 截取用户姓名后两位
+        // if (renwu != undefined){
+        //   this.renwuFlag = renwu
+        // } else {
+        //   this.renwuFlag = false
+        // }
+
       },
       goTalkAc () {
         this.talkFlag = !this.talkFlag
-        this.$router.replace('/taskTalkModel')
+
+        this.$router.replace('/discussListAll/0/0/1')
       },
-      goMessageAc () {
-        this.$router.replace('/messageList')
+      goMessageAc (e) {
+        if(e==0){
+          this.$router.replace('/messageList')
+        } else if (e==1){
+          this.$router.replace('/messagexitong')
+        } else if (e==2){
+          this.$router.replace('/messagegonggao')
+        } else if (e==3){
+          this.$router.replace('/messagefenxiang')
+        }
       },
       tabChange (e) {
         if(e==1){
           this.$router.replace('/TaskManagement')
+          this.renwuFlag = true
         } else if (e==2){
           this.$router.replace('/projectManagement')
+          this.renwuFlag = false
+
         }
       }
     }
@@ -138,6 +192,7 @@
   .active{
     color:$color06;
   }
+  .default_active{color:$color05}
   .head_top{
     color: $color05;
     .head_top_min{
@@ -223,6 +278,8 @@
             text-align: center;
             img{
               display: inline-block;
+              width: 29px;
+              height: 29px;
             }
             p{
               border-right: 2px solid $color02;
@@ -231,17 +288,6 @@
               height: 18px;
               line-height: 18px;
 
-            }
-            &:first-of-type{
-              p{
-                border-right: 2px solid $color06;
-                color:$color06;
-              }
-            }
-            &:nth-of-type(2){
-              p{
-                color:#848484;
-              }
             }
             &:nth-of-type(3){
               p{
@@ -259,4 +305,5 @@
       }
     }
   }
+  .talkicon{display: flex;align-items: center;cursor: pointer;}
 </style>

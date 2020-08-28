@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
+    <!-- <swooleNews></swooleNews> -->
   </div>
 </template>
 

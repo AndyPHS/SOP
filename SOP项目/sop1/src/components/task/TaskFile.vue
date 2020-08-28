@@ -75,7 +75,7 @@
                       <div class="w-1/3 ">
                         <ul class="flex justify-end items-center text-sm">
                           <li @click="moveAc" class="px-2 cursor-pointer border-r">移动</li>
-                          <li class="px-2 cursor-pointer border-r">下载</li>
+                          <li @click="downloadAc" class="px-2 cursor-pointer border-r">下载</li>
                           <li @click="shareAc" class="px-2 cursor-pointer border-r">分享</li>
                           <li @click="removeFileAc" class="px-2 cursor-pointer ">删除</li>
                         </ul>
@@ -103,9 +103,9 @@
                               <div class="w-1/5 text-center text-gray-600">
                                 <el-tooltip placement="bottom">
                                   <div slot="content" class="flex">
-                                    <span @click="textbtn" class="px-2 cursor-pointer border-r">预览</span>
-                                    <span @click="textbtn" class="px-2 cursor-pointer border-r">重命名</span>
-                                    <span @click="textbtn" class="px-2 cursor-pointer">置顶</span>
+                                    <span @click="viewAc" class="px-2 cursor-pointer border-r">预览</span>
+                                    <span @click="renameAc" class="px-2 cursor-pointer border-r">重命名</span>
+                                    <span @click="goTopAc" class="px-2 cursor-pointer">置顶</span>
                                   </div>
                                   <img class="mx-auto cursor-pointer" src="@/assets/image/soon_icon.png" alt="">
                                 </el-tooltip>
@@ -236,6 +236,18 @@
         <div class="registCancleBtn"  @click="cancleShareBtn">取消</div>
       </div>
     </el-dialog>
+    <!-- 重命名 -->
+    <el-dialog title="重命名" :visible.sync="dialogRename" center width="720px">
+      <el-form :model="renameForm" id="configrenwu">
+        <el-form-item label="文件夹名称" :label-width="formLabelWidth" class="w-4/5">
+          <el-input v-model="renameForm.rename" ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer pb-4 w-4/5 mx-auto flex justify-around" >
+        <div class="registBtn mx-auto" @click="renameOkBtn">确定</div>
+        <div class="registCancleBtn"  @click="cancleRenameBtn">取消</div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -299,7 +311,12 @@
         },
         sharenameAll: [
           {name:'大海',id:1},{name:'大海',id:1},{name:'大海',id:1},{name:'大海',id:1},{name:'大海',id:1},
-        ]
+        ],
+        // 重命名
+        dialogRename: false,
+        renameForm: {
+          rename: '委托手续'
+        },
       }
     },
     mounted(){
@@ -375,6 +392,13 @@
         this.dialogMove = false
         this.moveForm.selectBox = ''
       },
+      // 下载
+      downloadAc () {
+        this.$message({
+          message: '恭喜你，下载成功',
+          type: 'success'
+        });
+      },
       // 分享
       shareAc () { // 点击分享
         this.dialogShare = true
@@ -399,6 +423,25 @@
       },
       removeShare (index) { // 删除某元素
         this.sharenameAll.splice(index, 1)
+      },
+      renameAc (){ // 点击重命名
+        this.dialogRename = true
+      },
+      renameOkBtn (){ // 确定重命名
+        this.dialogRename = false
+      },
+      cancleRenameBtn () { // 取消重命名
+        this.dialogRename = false
+      },
+      //置顶
+      goTopAc () {
+        this.$message({
+          message: '置顶成功',
+          type: 'success'
+        });
+      },
+      viewAc () { // 预览按钮
+        this.$router.replace('/ViewImage')
       },
       // 删除
       removeFileAc () {

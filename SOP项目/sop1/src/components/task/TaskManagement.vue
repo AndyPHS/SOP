@@ -1,6 +1,6 @@
 <template>
   <div class="all">
-    <head-common></head-common>
+    <head-common :renwu = "renwuFlag"></head-common>
     <div class="con w-full">
       <div class="con_min">
         <div class="con_top">
@@ -8,8 +8,8 @@
             <ul>
               <li class="select">
                 <span :class="{active:ins==1}" @click="changeSelect">{{ myjobtitle }}</span>
-                <img class="ml-2" v-if="!select" src="@/assets/image/down_icon_dark.png" alt="">
-                <img class="ml-2" v-if="select" src="@/assets/image/down_icon_red.png" alt="">
+                <img @click="changeSelect" class="ml-2" v-if="!select" src="@/assets/image/down_icon_dark.png" alt="">
+                <img @click="changeSelect" class="ml-2" v-if="select" src="@/assets/image/down_icon_red.png" alt="">
                 <div class="selectbox" v-if="select">
                   <ul>
                     <li v-for="(item, index) in Myjob" :key="index" @click="chooseAboutme(item)">{{ item.name }}</li>
@@ -19,8 +19,8 @@
               <li class="selectRenWu">
                 <span :class="{active:ins==2}" @click="changeSelectRenWu">{{ changeSelectRenWuTitle }}</span>
                 <span class="missMsg">{{ changeSelectNum }}</span>
-                <img class="ml-2" v-if="!selectRenWu" src="@/assets/image/down_icon_dark.png" alt="">
-                <img class="ml-2" v-if="selectRenWu" src="@/assets/image/down_icon_red.png" alt="">
+                <img @click="changeSelectRenWu" class="ml-2" v-if="!selectRenWu" src="@/assets/image/down_icon_dark.png" alt="">
+                <img  @click="changeSelectRenWu" class="ml-2" v-if="selectRenWu" src="@/assets/image/down_icon_red.png" alt="">
                 <div class="selectRenWubox" v-if="selectRenWu">
                   <ul>
                     <li @click="chooseRenWu(item)" v-for="(item, index) in RenWu" :key="index">{{ item.name }}</li>
@@ -42,7 +42,7 @@
               </el-date-picker>
             </div>
             <div class="searchBox">
-              <input class="" v-model="searchMsg" type="text">
+              <input class="" v-model="searchMsg" type="text" @keydown="enterAc($event)" />
               <img @click="searchList" src="@/assets/image/search_icon.png" alt="">
             </div>
           </div>
@@ -53,7 +53,7 @@
             <span class="addRenWuBtn" @click="fastAddAction">确定</span>
           </div>
         </div>
-        <div class="con_list" v-if="this.selectAllTaskFlag==true">
+        <div class="con_list">
           <h2 v-if="this.allocated_top.length>0">待分配任务<span style="right: -15px;">{{ allocated_top.length }}</span></h2>
           <div v-if="this.allocated_top.length>0" class="con_list_min">
             <ul>
@@ -71,7 +71,8 @@
                     </div>
                   </div>
                 </div>
-                <div  @click="goxiangqing(item)" class="con_list_m cursor-pointer">
+                <!-- 待分配任务无法通过标题跳转到详情页 -->
+                <div class="con_list_m cursor-pointer">
                   <h3>
                     {{ item.title }}
                     <!-- status 0信息未填完任务 1开始任务 2完成任务 3延期任务 4过期任务 9删除任务 -->
@@ -91,7 +92,7 @@
                     <li></li>
                     <li></li>
                     <li>
-                      <img @click="configBtn(item)" src="@/assets/image/ren_04.png" alt="">
+                      <img @click="configBtn(item,6)" src="@/assets/image/ren_04.png" alt="">
                     </li>
                     <!-- 删除任务 -->
                     <li>
@@ -108,7 +109,7 @@
               <li v-for="(item, index) in toDay" :key="index">
                 <div class="duocuankuangBox">
                   <div class="duocuankuang">
-                    <img v-if="myjobId == 2 " @click="addLogOne(item)" src="@/assets/image/duoxuankuang.png" alt="">
+                    <img v-if="myjobId == 2 " class="cursor-pointer" @click="addLogOne(item)" src="@/assets/image/duoxuankuang.png" alt="">
                   </div>
                 </div>
                 <div class="con_list_i" >
@@ -136,32 +137,30 @@
                 </div>
                 <div class="con_list_r">
                   <ul>
+                    <li v-if="myjobId == 3">
+                      <img @click="sendCuiCu(item)" src="../../assets/image/cuicu_icon.png" alt="">
+                    </li>
                     <li>
                       <el-tooltip placement="left"  effect="light">
                         <div slot="content">
-                          <p class="mb-1">任务：{{ basic_data.title }}</p>
-                          <p class="mb-1">所属项目：的点点滴滴</p>
-                          <p class="mb-1">到期时间：{{ basic_data.end_time }}</p>
-                          <!-- <p class="mb-1">自检项目：的点点滴滴</p> -->
-                          <p class="mb-1">服务日志：的点点滴滴</p>
-                          <p class="mb-1">任务耗时：2天</p>
-                          <p class="mb-1">任务剩余：3天</p>
+                          <p class="mb-1">任务时间：<span class="text-xs">{{ item.start_time }}---{{ item.stop_time }}</span></p>
+                          <p class="mb-1">任务说明：{{ item.description }}</p>
                         </div>
                         <img src="@/assets/image/ren_01.png" alt="">
                       </el-tooltip>
                     </li>
                     <!-- 任务日志 -->
-                    <li>
-                      <img src="@/assets/image/ren_02.png" alt="">
+                    <li v-if="myjobId != 3">
+                      <img @click="addLog(item)" src="@/assets/image/ren_02.png" alt="">
                     </li>
                     <!-- 发起讨论/发起协作 -->
-                    <li>
+                    <li v-if="myjobId != 3">
                       <el-dropdown trigger="click">
                         <img class="el-dropdown-link" src="@/assets/image/ren_03.png" alt="">
                         <el-dropdown-menu>
                           <el-dropdown-item class="clearfix talkicon">
                             <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
-                            <span @click="InitiateDiscussion">发起讨论</span>
+                            <span @click="InitiateDiscussion(item.id,item.projectId)">发起讨论</span>
                           </el-dropdown-item>
                           <!-- <el-dropdown-item class="clearfix talkicon">
                             <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
@@ -173,11 +172,11 @@
                       </el-dropdown>
                     </li>
                     <!-- 修改任务 -->
-                    <li>
-                      <img @click="configBtn(item)" src="@/assets/image/ren_04.png" alt="">
+                    <li v-if="myjobId != 3">
+                      <img @click="configBtn(item,2)" src="@/assets/image/ren_04.png" alt="">
                     </li>
                     <!-- 删除任务 -->
-                    <li>
+                    <li v-if="myjobId != 3">
                       <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
                     </li>
                   </ul>
@@ -219,31 +218,29 @@
                 </div>
                 <div class="con_list_r">
                   <ul>
+                    <li v-if="myjobId == 3">
+                      <img @click="sendCuiCu(item)" src="../../assets/image/cuicu_icon.png" alt="">
+                    </li>
                     <li>
                       <el-tooltip placement="left"  effect="light">
                         <div slot="content">
-                          <p class="mb-1">任务：{{ basic_data.title }}</p>
-                          <p class="mb-1">所属项目：的点点滴滴</p>
-                          <p class="mb-1">到期时间：{{ basic_data.end_time }}</p>
-                          <!-- <p class="mb-1">自检项目：的点点滴滴</p> -->
-                          <p class="mb-1">服务日志：的点点滴滴</p>
-                          <p class="mb-1">任务耗时：2天</p>
-                          <p class="mb-1">任务剩余：3天</p>
+                          <p class="mb-1">任务时间：<span class="text-xs">{{ item.start_time }}---{{ item.stop_time }}</span></p>
+                          <p class="mb-1">任务说明：{{ item.description }}</p>
                         </div>
                         <img src="@/assets/image/ren_01.png" alt="">
                       </el-tooltip>
 
                     </li>
-                    <li>
+                    <li v-if="myjobId != 3">
                       <img src="@/assets/image/ren_02.png" alt="">
                     </li>
-                    <li>
+                    <li v-if="myjobId != 3">
                       <el-dropdown trigger="click">
                         <img class="el-dropdown-link" src="@/assets/image/ren_03.png" alt="">
                         <el-dropdown-menu>
                           <el-dropdown-item class="clearfix talkicon">
                             <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
-                            <span @click="InitiateDiscussion">发起讨论</span>
+                            <span @click="InitiateDiscussion(item.id,item.projectId)">发起讨论</span>
                           </el-dropdown-item>
                           <!-- <el-dropdown-item class="clearfix talkicon">
                             <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
@@ -254,10 +251,10 @@
                         </el-dropdown-menu>
                       </el-dropdown>
                     </li>
-                    <li>
+                    <li v-if="myjobId != 3">
                       <img src="@/assets/image/ren_04.png" alt="">
                     </li>
-                    <li>
+                    <li v-if="myjobId != 3">
                       <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
                     </li>
                   </ul>
@@ -299,31 +296,29 @@
                 </div>
                 <div class="con_list_r">
                   <ul>
+                    <li v-if="myjobId == 3">
+                      <img @click="sendCuiCu(item)" src="../../assets/image/cuicu_icon.png" alt="">
+                    </li>
                     <li>
                       <el-tooltip placement="left"  effect="light">
                         <div slot="content">
-                          <p class="mb-1">任务：{{ basic_data.title }}</p>
-                          <p class="mb-1">所属项目：的点点滴滴</p>
-                          <p class="mb-1">到期时间：{{ basic_data.end_time }}</p>
-                          <!-- <p class="mb-1">自检项目：的点点滴滴</p> -->
-                          <p class="mb-1">服务日志：的点点滴滴</p>
-                          <p class="mb-1">任务耗时：2天</p>
-                          <p class="mb-1">任务剩余：3天</p>
+                          <p class="mb-1">任务时间：<span class="text-xs">{{ item.start_time }}---{{ item.stop_time }}</span></p>
+                          <p class="mb-1">任务说明：{{ item.description }}</p>
                         </div>
                         <img src="@/assets/image/ren_01.png" alt="">
                       </el-tooltip>
                     </li>
-                    <li>
+                    <li v-if="myjobId != 3">
                       <img src="@/assets/image/ren_02.png" alt="">
                     </li>
                     <!-- 发起讨论/发起协作 -->
-                    <li>
+                    <li v-if="myjobId != 3">
                       <el-dropdown trigger="click">
                         <img class="el-dropdown-link" src="@/assets/image/ren_03.png" alt="">
                         <el-dropdown-menu>
                           <el-dropdown-item class="clearfix talkicon">
                             <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
-                            <span @click="InitiateDiscussion">发起讨论</span>
+                            <span @click="InitiateDiscussion(item.id,item.projectId)">发起讨论</span>
                           </el-dropdown-item>
                           <!-- <el-dropdown-item class="clearfix talkicon">
                             <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
@@ -334,10 +329,10 @@
                         </el-dropdown-menu>
                       </el-dropdown>
                     </li>
-                    <li>
+                    <li v-if="myjobId != 3">
                       <img src="@/assets/image/ren_04.png" alt="">
                     </li>
-                    <li>
+                    <li v-if="myjobId != 3">
                       <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
                     </li>
                   </ul>
@@ -377,114 +372,36 @@
                   </h3>
                   <p>{{ item.description }}</p>
                 </div>
-                <div class="con_list_r">
+                <div class="con_list_r flex justify-end">
                   <ul>
                     <li>
-                      <img src="@/assets/image/recover_icon.png" alt="">
+                      <el-popconfirm
+                        title="确认恢复任务？"
+                        @onConfirm="recoverAction(item.id)"
+                      >
+                        <div slot="reference">
+                           <img src="@/assets/image/recovery.png" alt="">
+                        </div>
+                      </el-popconfirm>
                     </li>
+                    <li v-if="myjobId == 3">
+                      <el-tooltip placement="left"  effect="light">
+                        <div slot="content">
+                          <p class="mb-1">任务时间：<span class="text-xs">{{ item.start_time }}---{{ item.stop_time }}</span></p>
+                          <p class="mb-1">任务说明：{{ item.description }}</p>
+                        </div>
+                        <img src="@/assets/image/ren_01.png" alt="">
+                      </el-tooltip>
+                    </li>
+                    <!-- <li>
+                      <img @click="recoverAction(item.id)" src="@/assets/image/recover_icon.png" alt="">
+                    </li> -->
                   </ul>
                 </div>
               </li>
             </ul>
           </div>
 
-        </div>
-        <div class="con_list" v-if="this.selectOnlyTaskFlag==true">
-          <div class="con_list_min">
-            <ul>
-              <li v-for="(item, index) in selectOnlyTask" :key="index">
-                <div class="duocuankuangBox">
-                   <img v-if="myjobId == 2 && changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4 " @click="addLogOne(item)" src="@/assets/image/duoxuankuang.png" alt="">
-                   <img v-if="changeSelectRenWuID == 5" src="@/assets/image/duoxuankuangqueding.png" alt="">
-                </div>
-                <div class="con_list_i" >
-                  <div v-if="item.M !=null">
-                    <div v-if="item.Mtype==2" class="toother">
-                      <span v-html="item.M.name"></span>
-                    </div>
-                    <div v-if="item.Mtype==1" class="tome">
-                      <span v-html="item.M.name"></span>
-                    </div>
-                  </div>
-                </div>
-                <div @click="goxiangqing(item)" class="con_list_m cursor-pointer">
-                  <h3 class="cursor-pointer">
-                    {{ item.title }}
-                  <!-- status 0信息未填完任务 1开始任务 2完成任务 3延期任务 4过期任务 9删除任务 -->
-                  <!-- "type"://1独立任务 2项目任务 3协作任务 -->
-                  <!-- rmtIs  1风控  0 无风险 -->
-                    <img v-if="item.status==4" src="@/assets/image/guo_icon.png" alt="">
-                    <img  v-if="item.rmtIs==1" src="@/assets/image/feng_icon.png" alt="">
-                    <img v-if="item.type==3" src="@/assets/image/xie_icon.png" alt="">
-                    <img v-if="item.status==3" src="@/assets/image/yan_icon.png" alt="">
-                  </h3>
-                  <p class="cursor-pointer">{{ item.description }}</p>
-                </div>
-                <div class="con_list_r">
-                  <ul>
-                    <li v-if="changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4 ">
-                      <el-tooltip placement="left"  effect="light">
-                        <div slot="content">
-                          <p class="mb-1">任务：{{ basic_data.title }}</p>
-                          <p class="mb-1">所属项目：的点点滴滴</p>
-                          <p class="mb-1">到期时间：{{ basic_data.end_time }}</p>
-                          <!-- <p class="mb-1">自检项目：的点点滴滴</p> -->
-                          <p class="mb-1">服务日志：的点点滴滴</p>
-                          <p class="mb-1">任务耗时：2天</p>
-                          <p class="mb-1">任务剩余：3天</p>
-                        </div>
-                        <img src="@/assets/image/ren_01.png" alt="">
-                      </el-tooltip>
-                    </li>
-                    <!-- 任务日志 -->
-                    <li v-if="changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4 || changeSelectRenWuID == 6">
-                      <img @click="addLog(item)" src="@/assets/image/ren_02.png" alt="">
-                    </li>
-                    <!-- 发起讨论/发起协作 -->
-                    <li v-if="changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4">
-                      <el-dropdown trigger="click">
-                        <img class="el-dropdown-link" src="@/assets/image/ren_03.png" alt="">
-                        <el-dropdown-menu>
-                          <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
-                            <span @click="InitiateDiscussion">发起讨论</span>
-                          </el-dropdown-item>
-                          <!-- <el-dropdown-item class="clearfix talkicon">
-                            <img class="mr-2" src="@/assets/image/team_icon.png" alt="">
-                            <span @click="InitiateCollaboration">
-                              发起协作
-                            </span>
-                          </el-dropdown-item> -->
-                        </el-dropdown-menu>
-                      </el-dropdown>
-                    </li>
-                    <!-- 编辑任务 -->
-                    <li v-if="changeSelectRenWuID == 2 || changeSelectRenWuID == 3 || changeSelectRenWuID == 4 || changeSelectRenWuID == 6">
-                      <img @click="configBtn(item)" src="@/assets/image/ren_04.png" alt="">
-                    </li>
-                    <!-- 删除任务 -->
-                    <li v-if="changeSelectRenWuID != 7 && changeSelectRenWuID != 5">
-                      <img @click="removeAction(item, index)" src="@/assets/image/ren_05.png" alt="">
-                    </li>
-                    <!-- 恢复任务 -->
-                    <li v-if="changeSelectRenWuID == 7 || changeSelectRenWuID == 5">
-                      <el-popover
-                        placement="top"
-                        width="160"
-                        v-model="visible">
-                        <p>确认恢复此任务？</p>
-                        <div style="text-align: right; margin: 0">
-                          <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-                          <el-button type="primary" size="mini"  @click="recoverAction(item.id)">确定</el-button>
-                        </div>
-                        <img slot="reference" src="@/assets/image/resetCover_icon.png" alt="">
-                      </el-popover>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
         </div>
         <div class="mx-auto notask" v-if="this.changeSelectNum == 0">
           <img class="mt-10" src="@/assets/image/notask.png" alt="">
@@ -498,82 +415,90 @@
           <el-input v-model="renwuform.title" class="inputcon" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="任务介绍" :label-width="formLabelWidth">
-          <el-input v-model="renwuform.description" class="inputcon" ></el-input>
+          <el-input v-model="renwuform.description" class="inputcon" autocomplete="off"></el-input>
         </el-form-item>
         <!-- 所属项目及分组 暂无接口 -->
-        <el-form-item label="所属项目及分组" :label-width="formLabelWidth">
-          <el-select class="mr-10" v-model="BuMenSelect" @change="BuMenChange" placeholder="请选择项目">
+        <el-form-item label="所属项目及分组" :label-width="formLabelWidth" v-if="dptIdflag">
+          <el-select
+            class="mr-3"
+            v-model="renwuform.dptId"
+            value-key="id"
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请选择项目"
+            @visible-change="selectGroup"
+            :remote-method="remoteProjectMethod"
+            :loading="loading">
             <el-option
-              v-for="(item, index) in BuMen"
-              :key="index"
-              :label="index"
-              :value="item">
+              v-for="item in projectOptions"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
             </el-option>
           </el-select>
-          <el-select v-model="XiangMuOrFenZuSelecter"  placeholder="请选择分组">
+          <el-select v-model="renwuform.groupId"  placeholder="请选择分组">
             <el-option
-              v-for="(item, index) in XiangMuOrFenZuAll"
-              :key="index"
-              :label="item.title"
-              :value="item.id">
+              v-for="item in XiangMuOrFenZuAll"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="负责人" :label-width="formLabelWidth">
-          <el-select class="mr-10" v-model="dptBuMenSelect" @change="chooseDpt" placeholder="请选择">
+          <el-select
+            v-model="renwuform.dpt"
+            value-key="id"
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请输入关键词"
+            :remote-method="remoteMethod"
+            :loading="loading">
             <el-option
-              v-for="(item, index) in BuMen"
-              :key="index"
-              :label="index"
-              :value="item">
-            </el-option>
-          </el-select>
-          <el-select v-model="renwuform.dpt" @change="changeDpt(renwuform.dpt)" value-key="value" placeholder="请选择">
-            <el-option
-              v-for="item in PersonAll"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="任务成员" :label-width="formLabelWidth" class="relative">
-          <el-select class="mr-10" v-model="dptDBuMenSelect" @change="choosedptD" placeholder="请选择成员">
+          <el-select
+            class="w-4/5"
+            v-model="renwuform.dptD"
+            value-key="id"
+            multiple
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请输入关键词"
+            :remote-method="remoteMethod"
+            :loading="loading">
             <el-option
-              v-for="(item, index) in BuMen"
-              :key="index"
-              :label="index"
-              :value="item">
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
             </el-option>
           </el-select>
-          <el-select v-model="renwuform.dptD" value-key="label" placeholder="请选择角色" multiple="multiple">
-            <el-option
-              v-for="item in PersonAll"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
-          <div class="addIconBox">
-            <img src="@/assets/image/delete_icon.png" alt="">
-            <img src="@/assets/image/add_icon.png" alt="">
-          </div>
         </el-form-item>
         <el-form-item label="审核人" :label-width="formLabelWidth">
-          <el-select class="mr-10" v-model="examineIdBuMenSelect"  @change="chooseexamineId" placeholder="请选择">
+          <el-select
+            v-model="renwuform.examineId"
+            value-key="id"
+            filterable
+            remote
+            reserve-keyword
+            placeholder="请输入关键词"
+            :remote-method="remoteMethod"
+            :loading="loading">
             <el-option
-              v-for="(item, index) in BuMen"
-              :key="index"
-              :label="index"
-              :value="item">
-            </el-option>
-          </el-select>
-          <el-select v-model="renwuform.examineId" value-key="label" @change="chooseLeader" placeholder="请选择">
-            <el-option
-              v-for="item in PersonAll"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
             </el-option>
           </el-select>
         </el-form-item>
@@ -596,7 +521,7 @@
         </el-form-item>
         <el-form-item label="优先级" :label-width="formLabelWidth">
           <el-select v-model="renwuform.first" placeholder="请选择">
-            <el-option label="紧急" value="1"></el-option>
+            <el-option label="紧急" value='1'></el-option>
             <el-option label="普通" value="2"></el-option>
           </el-select>
         </el-form-item>
@@ -631,12 +556,12 @@
     <!-- 任务日志弹窗 -->
     <el-dialog title="" :visible.sync="dialogLog" center width="720px">
       <div class="flex justify-center items-center py-2">
-        <img v-if="checkedLog" class="mr-2" src="@/assets/image/duoxuankuangqueding.png" alt="">
-        <span class="text-xl text-red-500">确定管辖法院</span>
+        <img v-if="checkedLog==true" class="mr-2" src="@/assets/image/duoxuankuangqueding.png" alt="">
+        <span class="text-xl text-red-500">{{this.logForm.title}}</span>
       </div>
-      <h2 class="text-lg text-center pb-4 pt-2">张三诉讼李四  离婚纠纷案</h2>
+      <h2 v-if="this.logForm.projectTitle !=null" class="text-lg text-center pb-4 pt-2">{{this.logForm.projectTitle}}</h2>
       <el-form :model="logForm" id="configrenwu">
-        <el-form-item label="时间" :label-width="LogLabelWidth">
+        <el-form-item label="时间" prop="time" :label-width="LogLabelWidth">
           <el-date-picker
             v-model="logForm.start_time"
             type="datetime"
@@ -653,14 +578,18 @@
             default-time="18:00:00">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="*" :label-width="LogLabelWidth">
+        <el-form-item label="内容" :label-width="LogLabelWidth" class="redItem">
           <el-input v-model="logForm.content" type="textarea" :rows="2" placeholder="输入日志内容" class="inputcon" autocomplete="off"></el-input>
         </el-form-item>
         <div class="w-2/3 mx-auto">
           <el-upload
             class="upload-demo"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="/api/sop_api/v1/files/temporaryFile"
+            name="files"
+            multiple
+            :headers="{'Authorization':token}"
             :on-preview="handlePreview"
+            :on-success="handleSuccess"
             :on-remove="handleRemove"
             :file-list="fileList"
             list-type="picture">
@@ -674,21 +603,15 @@
           <div class="w-1/5 my-4 text-right">自检项</div>
           <div class="w-4/5 pl-32">
             <el-checkbox-group
-                v-model="logForm.zijianxiang">
-                <el-checkbox v-for="(item, index) in InspectionTaskAll" :label="item.title" :key="index">{{item.title}}</el-checkbox>
-              </el-checkbox-group>
-            <!-- <ul>
-              <li v-for="(item, index) in InspectionTaskAll" :key="index" class="flex justify-around py-2">
-                <p class="w-5/6">{{ item.title }}</p>
-
-              </li>
-            </ul> -->
+              v-model="logForm.zijianxiang">
+              <el-checkbox v-for="(item, index) in InspectionTaskAll" :label="item.title" :key="index" @change="undateInspectionTask(item.id)" >{{item.title}}</el-checkbox>
+            </el-checkbox-group>
           </div>
         </div>
       </div>
 
       <div slot="footer" class="dialog-footer pb-4 w-4/5 mx-auto flex justify-around" >
-        <div class="registBtn mx-auto" @click="addLogBtn">提交</div>
+        <div  class="registBtn mx-auto" @click="addLogBtn">提交</div>
         <div class="registCancleBtn"  @click="cancleLogBtn">取消</div>
       </div>
     </el-dialog>
@@ -700,12 +623,13 @@
   import {addTask, updateTask, recoveryDeleteTask} from '@/api/api/requestLogin.js' // 新增任务
   import {deleteTask} from '@/api/api/requestLogin.js' // 删除任务
   import {selectTask} from '@/api/api/requestLogin.js' // 通过任务类型查询任务列表
-  import {selectTaskWhere} from '@/api/api/requestLogin.js' // 通过关键词查找任务列表
-  import {selectTaskWhereTime} from '@/api/api/requestLogin.js'  // 通过时间查找任务列表
   import {selectTaskOnly} from '@/api/api/requestLogin.js' // 查询任务详情信息
-  import {createdDet} from '@/api/api/requestLogin.js' // 查找部门
-  import {selectDet} from '@/api/api/requestLogin.js' // 查找部门成员
-  import {addInspectionTask, deleteInspectionTask, selectInspectionTask, selectSurplusInspectionTask} from '@/api/api/requestLogin.js' // 添加，删除，查找项目自检项
+  import {selectUserByName} from '@/api/api/requestLogin.js' // 搜索人员
+  import {addJournal} from '@/api/api/requestLogin.js' // 日志模块
+  import {cuiCu} from '@/api/api/requestLogin.js' // 发起催促
+
+  import {searchProject, selectProjectGroup } from '@/api/api/requestLogin.js' // 搜索项目，分组
+  import {addInspectionTask, deleteInspectionTask, selectInspectionTask, selectSurplusInspectionTask,updateInspectionTaskStatus} from '@/api/api/requestLogin.js' // 添加，删除，查找项目自检项
   export default{
     name:'TaskManagement',
     components: {
@@ -713,6 +637,7 @@
     },
     data() {
       return {
+        renwuFlag: true,
         visible:false,
         name: localStorage.getItem('name'),
         userId: localStorage.getItem('userId'),
@@ -746,7 +671,6 @@
         basic_data: {}, // 任务详情信息
         dpt: [], // 任务负责人
         dptD: [], // 任务团队成员
-        inspection: [], // 任务任务自检项
         notask: false, // 没有任务的时候替代图片
         form: {
           type: ''
@@ -754,81 +678,298 @@
         formLabelWidth: '150px',
         LogLabelWidth: '120px',
         dialogConfigRenWu: false, // 任务设置弹框开关
-        XiangMuOrFenZuSelecter: '', // 选择具体项目
         XiangMuOrFenZuAll: [], // 项目总分组
-        BuMenSelect: '', // 选定部门
-        dptBuMenSelect: '', // 选定负责人部门
-        dptDBuMenSelect: '', // 选定任务成员部门
-        examineIdBuMenSelect: '', // 选定审核人部门
-        BuMen: {}, // 部门列表
-        PersonAll: {}, // 部门全部成员
+        // 任务详情信息
+        taskMsg:{
+          basic_data:{
+            Invalid_time: null,
+            autoDelay: 1,
+            created_time: "2020-08-25 18:33:10",
+            description: "测试任务备注",
+            dptId: 123123123,
+            end_time: null,
+            examineId: 0,
+            examineName: null,
+            fid: null,
+            filesId: null,
+            first: null,
+            groupId: 6,
+            groupTitle: "测试",
+            id: 110,
+            priority: 1,
+            projectTitle: null,
+            rmtIs: 0,
+            start_time: "2014-12-21 09:12:12",
+            status: 1,
+            stop_time: "2014-12-21 09:12:12",
+            title: "测试任务",
+            type: 1,
+            uid: 28,
+            update_time: "2020-08-25 18:33:10"
+          },
+          dpt: [{
+            name: '',
+            id: null
+          }],
+          dptD: []
+        },
         renwuform: { // 任务设置表单
           title: '', // 标题
           description: '', // 介绍
-          type: null,  // 类型（1为单独项目 2为项目任务）
+          type: 1,  // 类型（1为单独任务 2为项目任务）
           dptId: null,  // 项目Id 任务类型为2的时候添加
           groupId: null, // 任务组id 任务类型为2的时候添加
-          autoDelay: null, // 是否自动延期
           start_time: '', // 开始时间 格式为yyyy-MM-dd HH:mm:ss
           stop_time: '', // 结束时间 格式为yyyy-MM-dd HH:mm:ss
           first: null,  // 优先级 1紧急 2普通
-          examineId: null, // 审核人
-          dpt: {}, // 负责人
+          examineId: null, // 审核人id
+          examineName: '',  // 审核人name
+          dpt: [], // 负责人
           dptD: [],   // 成员[1,2,3]
         },
+        dptIdflag: false, // 修改时候如果有项目id则为true
+        undateDptId: null,  // 暂存项目dptId
+        undateDpt: null,  // 暂存负责人id
+        undatefirst: null, // 优先级暂存
+        undateExamineId: null,
         InspectionTaskAll: [], // 全部任务自检项
         InspectionTaskTitle: '', // 自检项title
         selectRenwuId: null,// 选择当前任务
+        // 日志
+        checkedLog: false,  // 日志弹窗标题前的多选框默认不勾选
         dialogLog: false,  // 任务日志弹窗
-        checkedLog: false, // 是否完成
         logForm: {
           start_time: '',  // 开始时间
           stop_time: '',  // 结束时间
           content: '',  // 日志内容
-          file: null,   // 上传文件
-          zijianxiang: [], // 自检项
+          files: [],   // 上传文件
+          imgs: [],
+          zijianxiang: [], // 自检项/ 自检项
+          projectTitle: null,  // 项目日志的话这是项目名
+          title: ''  // 任务日志的名称
           // checkedzijian: []
         },
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        rules:{ //  表单验证
+          time: [
+            {type: 'date', required: true, message: '请选择日期', trigger: 'change'}
+          ],
+          content:[
+            {required: true, message: '输入日志内容', trigger: 'blur'}
+          ]
+        },
+		token:'bearer ' +  localStorage.getItem('token'),
+        fileList: [],
+        // 模糊搜索添加成员
+        options: [],
+        value: [],
+        list: [],
+        loading: false,
+        states: [],
+        // 模糊搜索项目
+        projectOptions: [],
+        projectStates: [],
       }
     },
     mounted(){
       this.pagestart()//页面初始化
-      this.GetBuMen() // 查找部门
+      this.remoteMethod('')
     },
     methods:{
+      remoteMethod(query) { // 模糊搜索全部成员
+        var that = this
+        selectUserByName({name:query}).then((data)=>{
+          that.states = data.data.data
+          that.options = that.states.map(item => {
+            return { value: item.id, label: item.name };
+          });
+        })
+      },
+      remoteProjectMethod(query) { // 模糊搜索项目
+        var that = this
+        searchProject({
+          status: 1,    // 1在办 2完结 9删除
+          title: query,
+          page: 1
+        }).then((data)=>{
+          var dataAll = data.data.data.data
+          that.projectOptions = dataAll.map(item => {
+            return { value: item.id, label: item.title };
+          });
+        })
+      },
+      selectGroup () { // 选择所属项目
+        var that = this
+        localStorage.setItem('dptId',this.renwuform.dptId)
+        selectProjectGroup().then((data) =>{
+          var dataAll = data.data.data
+          that.XiangMuOrFenZuAll = dataAll.map(item => {
+            return { value: item.id, label: item.title };
+          });
+        })
+      },
+      fastAddAction(){ // 点击新建，快速创建任务
+        this.renwuform.description = ''
+        this.renwuform.type = null
+        this.renwuform.dptId = null
+        this.renwuform.groupId = null
+        this.renwuform.start_time = ''
+        this.renwuform.stop_time = ''
+        this.renwuform.first = null
+        this.renwuform.examineId = null
+        this.renwuform.dpt = null
+        this.renwuform.dptD = []
+        if(this.newRenWu != ''){
+          addTask({
+            title: this.newRenWu
+          }).then((data)=>{
+             this.newRenWu = '';
+             this.pagestart()
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            message: '任务标题不能为空',
+            type: 'error'
+          });
+        }
+      },
+      configBtn (item,e) {  // 点击修改任务按钮
+        localStorage.setItem('selectRenwuId',item.id)
+        if(e==6){
+          this.dptIdflag = true
+        } else {
+          this.dptIdflag = false
+        }
+        this.selectRenwuId = item.id
+        this.dialogConfigRenWu = true;
+        selectTaskOnly(item.id).then((data)=>{
+          this.basic_data = data.data.data.basic_data;
+          this.renwuform.title = this.basic_data.title;
+          this.renwuform.dptId = this.basic_data.dptId;
+          if (this.basic_data.dptId != null){
+            localStorage.setItem('dptId',this.basic_data.dptId)
+            this.renwuform.dptId = this.basic_data.projectTitle
+            this.undateDptId =  this.basic_data.dptId
+          }
+          this.renwuform.groupId = this.basic_data.groupId;
+          this.renwuform.groupTitle = this.basic_data.groupTitle;
+          this.renwuform.description = this.basic_data.description;
+          this.renwuform.start_time = this.basic_data.start_time
+          this.renwuform.stop_time = this.basic_data.stop_time
+          this.renwuform.first = JSON.parse(this.basic_data.first)
+
+          this.renwuform.examineId = this.basic_data.examineName
+          this.undateExamineId = this.basic_data.examineId
+          this.InspectionTaskAll = data.data.data.inspection
+          if(data.data.data.dpt.length >0 ){
+            this.renwuform.dpt = data.data.data.dpt[0].name;
+            this.undateDpt = data.data.data.dpt[0].id
+          }
+          if(data.data.data.dptD.length >0 ){
+            var eedptD = data.data.data.dptD
+            var oldList = eedptD.map(eitem => {
+              return eitem.id ;
+            });
+            this.list = eedptD.map(eitem => {
+              return eitem.name ;
+            });
+            this.renwuform.dptD = oldList
+          }
+        })
+      },
       updateTaskBtn(){  // 修改任务
+        var needpt = this.renwuform.dpt
+        if(typeof needpt == "string"){
+          needpt = this.undateDpt
+        }
+        needpt ="[" + needpt + "]"
+        var neeexamined = this.renwuform.examineId
+        if(typeof neeexamined == "string"){
+          neeexamined = this.undateExamineId
+        } else {
+          neeexamined = this.renwuform.examineId
+        }
+
         if (this.renwuform.dptId == null || this.renwuform.groupId == null){
           this.renwuform.type = 1
         } else {
            this.renwuform.type = 2
         }
-        updateTask({
-          title: this.renwuform.title,
-          description: this.renwuform.description,
-          type:  this.renwuform.type,
-          start_time: this.renwuform.start_time,
-          stop_time: this.renwuform.stop_time,
-          dpt: this.renwuform.dpt.id,
-          dptD: JSON.stringify(this.renwuform.dptD),
-          examineId: this.renwuform.examineId,
-          first: this.renwuform.first
-        }).then((data)=>{
-          this.renwuform = {};
-          this.dptBuMenSelect = '';
-          this.dialogConfigRenWu = false;
-        })
+        if(this.renwuform.type == 1){ //单独任务
+          updateTask({
+            title: this.renwuform.title,
+            description: this.renwuform.description,
+            type:  1,
+            start_time: this.renwuform.start_time,
+            stop_time: this.renwuform.stop_time,
+            dpt: needpt,
+            dptD: JSON.stringify(this.renwuform.dptD),
+            examineId: neeexamined,
+            first: this.renwuform.first
+          }).then((data)=>{
+            this.pagestart()
+            this.renwuform.title = ''
+            this.renwuform.description = ''
+            this.renwuform.type = null
+            this.renwuform.dptId = null
+            this.renwuform.groupId = null
+            this.renwuform.start_time = ''
+            this.renwuform.stop_time = ''
+            this.renwuform.first = null
+            this.renwuform.examineId = null
+            this.renwuform.dpt = null
+            this.renwuform.dptD = []
+            this.dialogConfigRenWu = false;
+          })
+        } else if(this.renwuform.type == 2){
+          updateTask({
+            title: this.renwuform.title,
+            description: this.renwuform.description,
+            type:  2,
+            dptId: this.renwuform.dptId,
+            groupId: this.renwuform.groupId,
+            start_time: this.renwuform.start_time,
+            stop_time: this.renwuform.stop_time,
+            dpt: needpt,
+            dptD: JSON.stringify(this.renwuform.dptD),
+            examineId: neeexamined,
+            first: this.renwuform.first
+          }).then((data)=>{
+            this.pagestart()
+            this.renwuform.title = ''
+            this.renwuform.description = ''
+            this.renwuform.type = null
+            this.renwuform.dptId = null
+            this.renwuform.groupId = null
+            this.renwuform.start_time = ''
+            this.renwuform.stop_time = ''
+            this.renwuform.first = null
+            this.renwuform.examineId = null
+            this.renwuform.dpt = null
+            this.renwuform.dptD = []
+            this.dialogConfigRenWu = false;
+          })
+        }
+
       },
       cancleTaskBtn () { // 取消设置
         this.dialogConfigRenWu = false;
-        this.renwuform = {};
-        this.dptBuMenSelect = '';
+        this.renwuform.title = ''
+        this.renwuform.description = ''
+        this.renwuform.type = null
+        this.renwuform.dptId = null
+        this.renwuform.groupId = null
+        this.renwuform.start_time = ''
+        this.renwuform.stop_time = ''
+        this.renwuform.first = null
+        this.renwuform.examineId = null
+        this.renwuform.dpt = null
+        this.renwuform.dptD = []
       },
       pagestart(){ // 初始化数据
-
         selectTask({
           why: 1,
-          type: 1
+          status: 1
         }).then((data)=>{  // 查询任务列表
           this.allocated_top = data.data.data.allocated_top;
           this.toDay = data.data.data.toDay;
@@ -836,6 +977,11 @@
           this.futureDay = data.data.data.futureDay;
           this.endDay = data.data.data.endDay;
           this.changeSelectNum = this.allocated_top.length + this.toDay.length + this.nearDay.length + this.futureDay.length + this.endDay.length
+          if (data.data.status_code == '401'){
+            this.$router.replace('/')
+          }
+        }).catch((data)=>{
+          this.$router.replace('/')
         })
       },
       changeSelect(){ // 点击我负责的切换
@@ -854,28 +1000,15 @@
         this.myjobId = item.ID;
         selectTask({
           why: this.myjobId,
-          type: this.changeSelectRenWuID
+          status: this.changeSelectRenWuID
+          // type: 1
         }).then((data)=>{  // 查询任务列表
-          if(this.changeSelectRenWuID == 1){
-            this.selectOnlyTaskFlag = false
-            this.selectAllTask = true
-            this.allocated_top = data.data.data.allocated_top;
-            this.toDay = data.data.data.toDay;
-            this.nearDay = data.data.data.nearDay;
-            this.futureDay = data.data.data.futureDay;
-            this.endDay = data.data.data.endDay;
-            this.changeSelectNum = this.allocated_top.length + this.toDay.length + this.nearDay.length + this.futureDay.length + this.endDay.length
-          } else {
-            this.allocated_top = [];
-            this.toDay = [];
-            this.nearDay = [];
-            this.futureDay = [];
-            this.endDay = [];
-            this.selectAllTask = false
-            this.selectOnlyTaskFlag = true
-            this.selectOnlyTask = data.data.data
-            this.changeSelectNum  = this.selectOnlyTask.length
-          }
+          this.allocated_top = data.data.data.allocated_top;
+          this.toDay = data.data.data.toDay;
+          this.nearDay = data.data.data.nearDay;
+          this.futureDay = data.data.data.futureDay;
+          this.endDay = data.data.data.endDay;
+          this.changeSelectNum = this.allocated_top.length + this.toDay.length + this.nearDay.length + this.futureDay.length + this.endDay.length
           if(this.changeSelectNum.length==0){
             this.notask = true;
           }else{
@@ -884,34 +1017,19 @@
         })
       },
       chooseRenWu(item){  // 选择任务按钮触发
-        this.selectOnlyTaskFlag = true
-        this.selectAllTask = false
         this.changeSelectRenWuID = item.ID
         this.changeSelectRenWuTitle = item.name;
         selectTask({
           why: this.myjobId,
-          type: this.changeSelectRenWuID
+          status: this.changeSelectRenWuID
+          // type: 1
         }).then((data)=>{  // 查询任务列表
-          if(this.changeSelectRenWuID == 1){
-            this.selectOnlyTaskFlag = false
-            this.selectAllTask = true
-            this.allocated_top = data.data.data.allocated_top;
-            this.toDay = data.data.data.toDay;
-            this.nearDay = data.data.data.nearDay;
-            this.futureDay = data.data.data.futureDay;
-            this.endDay = data.data.data.endDay;
-            this.changeSelectNum = this.allocated_top.length + this.toDay.length + this.nearDay.length + this.futureDay.length + this.endDay.length
-          } else {
-            this.allocated_top = [];
-            this.toDay = [];
-            this.nearDay = [];
-            this.futureDay = [];
-            this.endDay = [];
-            this.selectAllTask = false
-            this.selectOnlyTaskFlag = true
-            this.selectOnlyTask = data.data.data
-            this.changeSelectNum  = this.selectOnlyTask.length
-          }
+          this.allocated_top = data.data.data.allocated_top;
+          this.toDay = data.data.data.toDay;
+          this.nearDay = data.data.data.nearDay;
+          this.futureDay = data.data.data.futureDay;
+          this.endDay = data.data.data.endDay;
+          this.changeSelectNum = this.allocated_top.length + this.toDay.length + this.nearDay.length + this.futureDay.length + this.endDay.length
           if(this.changeSelectNum ==0){
             this.notask = true;
           }else{
@@ -920,17 +1038,24 @@
         })
         this.selectRenWu = false
       },
+      enterAc (e){ // 回车键搜索
+        if(e.keyCode ==13){
+          this.searchList()
+        }
+      },
       searchList(){ // 通过关键字查找任务
+        this.selectTime = '';
         this.allocated_top = [];
         this.toDay = [];
         this.nearDay = [];
         this.futureDay = [];
         this.endDay = [];
         this.allocated_button = [];
-        selectTaskWhere({
+        selectTask({
           where: this.searchMsg
+          // type: 1
         }).then((data)=>{  // 查询任务列表
-          this.searchMsg = '';
+          // this.searchMsg = '';
           this.allocated_top = data.data.data.allocated_top;
           this.toDay = data.data.data.toDay;
           this.nearDay = data.data.data.nearDay;
@@ -947,16 +1072,18 @@
         // this.selectTime = '';
       },
       searchTimeList(){ // 通过时间查找任务
+        this.searchMsg = '';
         this.allocated_top = [];
         this.toDay = [];
         this.nearDay = [];
         this.futureDay = [];
         this.endDay = [];
         this.allocated_button = [];
-        selectTaskWhereTime({
+        selectTask({
           whereTime: this.selectTime
+          // type: 1
         }).then((data)=>{  // 查询任务列表
-          this.selectTime = '';
+          // this.selectTime = '';
           this.allocated_top = data.data.data.allocated_top;
           this.toDay = data.data.data.toDay;
           this.nearDay = data.data.data.nearDay;
@@ -971,23 +1098,15 @@
           }
         })
       },
-      fastAddAction(){ // 点击新建，快速创建任务
-        if(this.newRenWu != ''){
-          this.renwuform = {};
-          addTask({
-            title: this.newRenWu,
-            type: 1
-          }).then((data)=>{
-             this.newRenWu = '';
-             this.pagestart()
-          })
-        } else {
-          this.$message({
-            showClose: true,
-            message: '任务标题不能为空',
-            type: 'error'
-          });
+      addLogOne (item) { // 点击任务前面的多选框填写日志
+        this.checkedLog = false
+        if(this.myjobId = 2){
+          this.checkedLog = true
         }
+        this.dialogLog = true
+        this.selectInspectionTaskAction(item.id)
+        this.logForm.title = item.title
+        this.logForm.projectTitle = item.projectTitle
       },
       queding(){ // 选择前面确定多选框
         if(this.form.type){
@@ -1043,35 +1162,29 @@
           });
         })
       },
-      InitiateDiscussion(){ // 发起讨论
-        alert("发起讨论")
+      sendCuiCu (item) { // 发起催促
+        localStorage.setItem('selectRenwuId',item.id)
+        cuiCu().then((data) =>{
+          if(data.data.status_code==200){
+            this.$message({
+              message: '已发送任务提醒',
+              type: 'success'
+            });
+          }
+        }).catch((data)=>{
+
+        })
+      },
+      InitiateDiscussion(id,projectId){ // 发起讨论
+        if(projectId == null){
+          projectId = 0
+        }
+        this.$router.replace('/discussUpload/'+ projectId + '/' + id)
       },
       InitiateCollaboration(){ // 发起协作
         alert('发起协作')
       },
-      changeDpt(val){
-        console.log(val)
-      },
-      configBtn (item) {  // 点击修改任务按钮
-        localStorage.setItem('selectRenwuId',item.id)
-        this.selectRenwuId = item.id
-        this.dialogConfigRenWu = true;
-        this.renwuform.title = item.title;
-        this.renwuform.description = JSON.stringify(item.description);
-        selectTaskOnly(item.id).then((data)=>{
-          this.dpt = data.data.data.dpt;
-          this.dptD = data.data.data.dptD;
-          // this.basic_data = data.data.data.basic_data;
-          this.renwuform.dpt = data.data.data.dpt;
-          this.renwuform.dptD = data.data.data.dptD;
-          this.inspection = data.data.data.inspection;
-          this.renwuform.start_time = data.data.data.basic_data.start_time;
-          this.renwuform.stop_time = data.data.data.basic_data.stop_time;
-          this.renwuform.first = 1
-          this.changeDpt(this.renwuform.dpt)
-        })
-        this.selectInspectionTaskAction(item.id)
-      },
+
       selectInspectionTaskAction (e) { // 查询自检项
         selectInspectionTask(e).then((data) => {
           if(data.data.status_code ==200 ){
@@ -1092,44 +1205,8 @@
           this.InspectionTaskTitle = ''
         })
       },
-      GetBuMen(){ // 获取部门
-        createdDet().then((data)=>{
-          this.BuMen = data.data.data.permissions_department
-        })
-      },
-      chooseDpt(){ // 获取负责人
-        this.PersonAll = {}
-        selectDet(this.dptBuMenSelect).then((data)=>{
-          this.PersonAll = data.data.data
-        })
-      },
-      choosedptD(){ // 获取任务成员
-        this.PersonAll = {}
-        selectDet(this.dptDBuMenSelect).then((data)=>{
-          this.PersonAll = data.data.data
-        })
-      },
-      chooseexamineId(){ // 选择审核人部门
-        this.PersonAll = {}
-        selectDet(this.examineIdBuMenSelect).then((data)=>{
-          this.PersonAll = data.data.data
-        })
-      },
-      chooseLeader(){ // 选择审核人
-        console.log(this.renwuform.examineId)
-      },
-      BuMenChange(){ // 选择部门
-        console.log(this.BuMenSelect)
-      },
-      XiangMuOrFenZuChange(){
-        console.log(1)
-      },
-      addLogOne (item) {
-        this.checkedLog = true
-        this.dialogLog = true
-        this.selectInspectionTaskAction(item.id)
-      },
       goxiangqing (item) { // 点击进入详情页面
+        localStorage.setItem('selectRenwuId', item.id)
         this.$router.push({
           path:'/TaskCon',
           query:{
@@ -1138,32 +1215,63 @@
         })
       },
       addLog (item) { // 添加日志弹窗
-        this.dialogLog = true
         this.checkedLog = false
+        this.dialogLog = true
         this.selectInspectionTaskAction(item.id)
+        this.logForm.title = item.title
+        this.logForm.projectTitle = item.projectTitle
       },
       handleRemove(file, fileList) { // 删除日志预览图片
         console.log(file, fileList);
       },
-      handlePreview(file) { // 添加日志图片
-        console.log(file);
+      handlePreview(file) { // 添加日志文件
+        for(var i =0;i<files.data.length;i++){
+          this.logForm.files.push(files.data[i])
+        }
+      },
+      handleSuccess(response, file, fileList) { // 添加成功返回的
+        var successfile = response.data[0]
+        this.logForm.imgs.push(successfile)
+      },
+      undateInspectionTask (id) { // 更新自检项状态
+        updateInspectionTaskStatus(id).then((data)=>{})
       },
       addLogBtn () { // 提交日志
-        alert("提交成功")
-        this.dialogLog = false
-        this.logForm.start_time = ''  // 开始时间
-        this.logForm.stop_time = '';  // 结束时间
-        this.logForm.content = '';  // 日志内容
-        this.logForm.file = null;   // 上传文件
-        this.logForm.zijianxiang = []; // 自检项
+        addJournal({
+          content: this.logForm.content,
+          type: 2,
+          dpId: localStorage.getItem("selectRenwuId"),
+          status: 1,
+          start_time: this.logForm.start_time,
+          stop_time: this.logForm.stop_time,
+          imgs: JSON.stringify(this.logForm.imgs)
+        }).then((data) => {
+          if(data.data.status_code==200){
+            this.$message({
+              message: '提交成功',
+              type: 'success'
+            });
+            this.dialogLog = false
+            this.logForm.start_time = ''  // 开始时间
+            this.logForm.stop_time = '';  // 结束时间
+            this.logForm.content = '';  // 日志内容
+            this.logForm.imgs = [];   // 上传文件
+            this.logForm.zijianxiang = []; // 自检项
+            this.fileList = []
+          } else {
+            this.$message.error(data.data.message);
+          }
+
+        })
       },
       cancleLogBtn () { // 取消提交日志
         this.dialogLog = false
         this.logForm.start_time = ''  // 开始时间
         this.logForm.stop_time = '';  // 结束时间
         this.logForm.content = '';  // 日志内容
-        this.logForm.file = null;   // 上传文件
+        this.logForm.imgs = [];   // 上传文件
         this.logForm.zijianxiang = []; // 自检项
+        this.fileList = []
       }
     }
   }
@@ -1581,7 +1689,7 @@
                   width: 100%;
                   display: flex;
                   align-items: center;
-                  justify-content: space-around;
+                  justify-content: flex-end;
                   li{
                     display: flex;
                     align-items: center;

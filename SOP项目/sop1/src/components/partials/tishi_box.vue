@@ -47,6 +47,7 @@
   .text-606060 {color: #606060 ;}
   #tishiBox{
     position: fixed;
+    z-index: 1000;
     top: 37px;
     right: 20px;
     width: 340px;

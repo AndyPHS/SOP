@@ -37,7 +37,7 @@
                     <img class="mr-3" src="@/assets/image/upload_icon.png" alt="">
                     <span @click="uploadAc" class="text-base cursor-pointer text-gray-500">上传文件</span>
                   </div>
-                  <div class="flex justify-start items-center">
+                  <div @click="addFileAc" class="flex justify-start items-center">
                     <img class="mr-3" src="@/assets/image/addfile_icon.png" alt="">
                     <span class="text-base cursor-pointer text-gray-500">新建文件夹</span>
                   </div>
@@ -76,45 +76,9 @@
                           <div class="w-1/4 text-center text-gray-600">
                             <el-tooltip placement="bottom">
                               <div slot="content" class="flex">
-                                <span @click="textbtn" class="px-2 cursor-pointer border-r">重命名</span>
+                                <span @click="renameAc()" class="px-2 cursor-pointer border-r">重命名</span>
                                 <span @click="textbtn" class="px-2 cursor-pointer border-r">置顶</span>
-                                <span class="px-2 cursor-pointer ">删除</span>
-                              </div>
-                              <img class="mx-auto cursor-pointer" src="@/assets/image/soon_icon.png" alt="">
-                            </el-tooltip>
-                          </div>
-                        </li>
-                        <li class="text-base flex justify-center items-center text-gray-500 py-2 border-b border-gray-300">
-                          <div class="w-1/4 text-left flex items-center">
-                            <img class="mr-2" src="@/assets/image/file_icon.png" alt="">
-                            <h2 @click="goCon" class="text-gray-700 text-sm cursor-pointer">委托手续</h2>
-                          </div>
-                          <span class="w-1/4 text-center text-sm text-gray-600">3</span>
-                          <span class="w-1/4 text-center text-sm text-gray-600">2019-10-19</span>
-                          <div class="w-1/4 text-center text-gray-600">
-                            <el-tooltip placement="bottom">
-                              <div slot="content" class="flex">
-                                <span @click="textbtn" class="px-2 cursor-pointer border-r">重命名</span>
-                                <span @click="textbtn" class="px-2 cursor-pointer border-r">置顶</span>
-                                <span class="px-2 cursor-pointer ">删除</span>
-                              </div>
-                              <img class="mx-auto cursor-pointer" src="@/assets/image/soon_icon.png" alt="">
-                            </el-tooltip>
-                          </div>
-                        </li>
-                        <li class="text-base flex justify-center items-center text-gray-500 py-2 border-b border-gray-300">
-                          <div class="w-1/4 text-left flex items-center">
-                            <img class="mr-2" src="@/assets/image/file_icon.png" alt="">
-                            <h2 @click="goCon" class="text-gray-700 text-sm cursor-pointer">委托手续</h2>
-                          </div>
-                          <span class="w-1/4 text-center text-sm text-gray-600">3</span>
-                          <span class="w-1/4 text-center text-sm text-gray-600">2019-10-19</span>
-                          <div class="w-1/4 text-center text-gray-600">
-                            <el-tooltip placement="bottom">
-                              <div slot="content" class="flex">
-                                <span @click="textbtn" class="px-2 cursor-pointer border-r">重命名</span>
-                                <span @click="textbtn" class="px-2 cursor-pointer border-r">置顶</span>
-                                <span class="px-2 cursor-pointer ">删除</span>
+                                <span @click="removeAc" class="px-2 cursor-pointer ">删除</span>
                               </div>
                               <img class="mx-auto cursor-pointer" src="@/assets/image/soon_icon.png" alt="">
                             </el-tooltip>
@@ -130,6 +94,30 @@
         </div>
       </div>
     </div>
+    <!-- 重命名 -->
+    <el-dialog title="重命名" :visible.sync="dialogRename" center width="720px">
+      <el-form :model="renameForm" id="configrenwu">
+        <el-form-item label="文件夹名称" :label-width="formLabelWidth" class="w-4/5">
+          <el-input v-model="renameForm.rename" ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer pb-4 w-4/5 mx-auto flex justify-around" >
+        <div class="registBtn mx-auto" @click="renameOkBtn">确定</div>
+        <div class="registCancleBtn"  @click="cancleRenameBtn">取消</div>
+      </div>
+    </el-dialog>
+    <!-- 新建文件夹 -->
+    <el-dialog title="新建文件夹" :visible.sync="dialogAddfile" center width="720px">
+      <el-form  id="configrenwu">
+        <el-form-item label="文件夹名称" :label-width="formLabelWidth" class="w-4/5">
+          <el-input v-model="filename" ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer pb-4 w-4/5 mx-auto flex justify-around" >
+        <div class="registBtn mx-auto" @click="addfileOkBtn">确定</div>
+        <div class="registCancleBtn"  @click="cancleaddfileBtn">取消</div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -142,7 +130,14 @@
     },
     data() {
       return {
-
+        // 移动弹窗
+        dialogRename: false,
+        formLabelWidth: '150px',
+        renameForm: {
+          rename: '委托手续'
+        },
+        dialogAddfile: false,
+        filename: ''
       }
     },
     mounted(){
@@ -167,8 +162,44 @@
          })
         }
       },
+      renameAc (){ // 点击重命名
+        this.dialogRename = true
+      },
+      renameOkBtn (){ // 确定重命名
+        this.dialogRename = false
+      },
+      cancleRenameBtn () { // 取消重命名
+        this.dialogRename = false
+      },
+      addFileAc () { // 点击新建文件夹
+        this.dialogAddfile = true
+      },
+      addfileOkBtn () {// 新建文件夹确认按钮
+        this.dialogAddfile = false
+      },
+      cancleaddfileBtn () {// 取消新建
+         this.dialogAddfile = false
+      },
       textbtn () { // 重命名
         alert(1)
+      },
+      removeAc () { // 删除文件夹
+        this.$confirm('确认删除该文件, 删除后不可恢复，是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          center: true
+        }).then((data)=>{
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
       },
       goBack () { // 返回任务管理页面
         this.$router.replace("/TaskManagement")

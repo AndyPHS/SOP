@@ -7,6 +7,7 @@ import $ from 'jquery'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import Axios from 'axios'
+import swooleNews from '@/components/hhl/swoole'
 // import VueAxios from 'vue-axios'
 import VueResource from 'vue-resource'  // 请求数据
 import '@/assets/css/tailwind.css'  // 导入tailwind
@@ -14,7 +15,7 @@ import '@/assets/css/tailwind.css'  // 导入tailwind
 Vue.prototype.$axios = Axios
 Axios.defaults.baseURL = '/api'
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
-
+Vue.component("swooleNews", swooleNews)
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(ElementUI)
@@ -30,7 +31,7 @@ router.beforeEach((to, from, next) => {
     if (window.localStorage.getItem('login')) {
       next()
     } else {
-      next('/login')
+      next('/')
     }
   } else {
     next()  // 确保一定要有next()被调用
